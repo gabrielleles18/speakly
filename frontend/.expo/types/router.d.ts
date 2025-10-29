@@ -1,0 +1,14 @@
+/* eslint-disable */
+import * as Router from 'expo-router';
+
+export * from 'expo-router';
+
+declare module 'expo-router' {
+  export namespace ExpoRouter {
+    export interface __routes<T extends string | object = string> {
+      hrefInputParams: { pathname: Router.RelativePathString, params?: Router.UnknownInputParams } | { pathname: Router.ExternalPathString, params?: Router.UnknownInputParams } | { pathname: `/_sitemap`; params?: Router.UnknownInputParams; } | { pathname: `${'/(protected)'}${'/(tabs)'}` | `/`; params?: Router.UnknownInputParams; } | { pathname: `${'/(protected)'}${'/(tabs)'}/two` | `/two`; params?: Router.UnknownInputParams; } | { pathname: `${'/(public)'}/login` | `/login`; params?: Router.UnknownInputParams; } | { pathname: `${'/(public)'}/register` | `/register`; params?: Router.UnknownInputParams; } | { pathname: `/+not-found`, params: Router.UnknownInputParams & {  } };
+      hrefOutputParams: { pathname: Router.RelativePathString, params?: Router.UnknownOutputParams } | { pathname: Router.ExternalPathString, params?: Router.UnknownOutputParams } | { pathname: `/_sitemap`; params?: Router.UnknownOutputParams; } | { pathname: `${'/(protected)'}${'/(tabs)'}` | `/`; params?: Router.UnknownOutputParams; } | { pathname: `${'/(protected)'}${'/(tabs)'}/two` | `/two`; params?: Router.UnknownOutputParams; } | { pathname: `${'/(public)'}/login` | `/login`; params?: Router.UnknownOutputParams; } | { pathname: `${'/(public)'}/register` | `/register`; params?: Router.UnknownOutputParams; } | { pathname: `/+not-found`, params: Router.UnknownOutputParams & {  } };
+      href: Router.RelativePathString | Router.ExternalPathString | `/_sitemap${`?${string}` | `#${string}` | ''}` | `${'/(protected)'}${'/(tabs)'}${`?${string}` | `#${string}` | ''}` | `/${`?${string}` | `#${string}` | ''}` | `${'/(protected)'}${'/(tabs)'}/two${`?${string}` | `#${string}` | ''}` | `/two${`?${string}` | `#${string}` | ''}` | `${'/(public)'}/login${`?${string}` | `#${string}` | ''}` | `/login${`?${string}` | `#${string}` | ''}` | `${'/(public)'}/register${`?${string}` | `#${string}` | ''}` | `/register${`?${string}` | `#${string}` | ''}` | { pathname: Router.RelativePathString, params?: Router.UnknownInputParams } | { pathname: Router.ExternalPathString, params?: Router.UnknownInputParams } | { pathname: `/_sitemap`; params?: Router.UnknownInputParams; } | { pathname: `${'/(protected)'}${'/(tabs)'}` | `/`; params?: Router.UnknownInputParams; } | { pathname: `${'/(protected)'}${'/(tabs)'}/two` | `/two`; params?: Router.UnknownInputParams; } | { pathname: `${'/(public)'}/login` | `/login`; params?: Router.UnknownInputParams; } | { pathname: `${'/(public)'}/register` | `/register`; params?: Router.UnknownInputParams; } | `/+not-found${`?${string}` | `#${string}` | ''}` | { pathname: `/+not-found`, params: Router.UnknownInputParams & {  } };
+    }
+  }
+}
