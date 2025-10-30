@@ -1,37 +1,44 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { BookOpen, Heart, Home, User } from '@tamagui/lucide-icons';
 import { Tabs } from 'expo-router';
 import React from 'react';
-
-import Colors from '@/constants/Colors';
-
-function TabBarIcon(props: {
-    name: React.ComponentProps<typeof FontAwesome>['name'];
-    color: string;
-}) {
-    return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
-}
+import { useTheme } from 'tamagui';
 
 export default function TabLayout() {
+    const theme = useTheme();
 
     return (
         <Tabs
             screenOptions={{
-                tabBarActiveTintColor: Colors.light.tint,
+                tabBarActiveTintColor: theme.green10.val,
                 headerShown: false,
             }}
         >
             <Tabs.Screen
                 name="index"
                 options={{
-                    title: 'Tab One',
-                    tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+                    title: 'Home',
+                    tabBarIcon: ({ color }) => <Home color={color as any} size="$1" />,
                 }}
             />
             <Tabs.Screen
-                name="two"
+                name="favorite"
                 options={{
-                    title: 'Tab Two',
-                    tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+                    title: 'Favorite',
+                    tabBarIcon: ({ color }) => <Heart color={color as any} size="$1" />,
+                }}
+            />
+            <Tabs.Screen
+                name="practice"
+                options={{
+                    title: 'Practice',
+                    tabBarIcon: ({ color }) => <BookOpen color={color as any} size="$1" />,
+                }}
+            />
+            <Tabs.Screen
+                name="profile"
+                options={{
+                    title: 'Profile',
+                    tabBarIcon: ({ color }) => <User color={color as any} size="$1" />,
                 }}
             />
         </Tabs>
