@@ -3,8 +3,12 @@ import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
+import { useColorScheme } from 'react-native';
 import 'react-native-reanimated';
+import { TamaguiProvider } from 'tamagui';
 
+import { tamaguiConfig } from '@/tamagui.config';
+import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 
 export { ErrorBoundary } from 'expo-router';
 
@@ -38,11 +42,16 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
+    const colorScheme = useColorScheme();
 
     return (
-        <Stack>
-            <Stack.Screen name="(protected)" options={{ headerShown: false }} />
-            <Stack.Screen name="(public)" options={{ headerShown: false }} />
-        </Stack>
+        <TamaguiProvider config={tamaguiConfig} defaultTheme={colorScheme!}>
+            <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+                <Stack>
+                    <Stack.Screen name="(protected)" options={{ headerShown: false }} />
+                    <Stack.Screen name="(public)" options={{ headerShown: false }} />
+                </Stack>
+            </ThemeProvider>
+        </TamaguiProvider>
     );
 }

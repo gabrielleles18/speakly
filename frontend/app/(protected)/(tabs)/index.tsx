@@ -1,9 +1,13 @@
-import { StyleSheet, Text, View  } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { Button } from 'tamagui';
+import { useRouter } from 'expo-router';
 
 export default function TabOneScreen() {
+    const router = useRouter();
+
     return (
         <View style={styles.container}>
-            <Text>Home</Text>
+            <Button onPress={() => router.push('/login')}>Login</Button>
         </View>
     );
 }
