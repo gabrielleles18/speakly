@@ -9,6 +9,7 @@ import { TamaguiProvider } from 'tamagui';
 
 import { tamaguiConfig } from '@/tamagui.config';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { StatusBar } from 'expo-status-bar';
 
 export { ErrorBoundary } from 'expo-router';
 
@@ -46,6 +47,7 @@ function RootLayoutNav() {
 
     return (
         <TamaguiProvider config={tamaguiConfig} defaultTheme={colorScheme!}>
+            <StatusBar backgroundColor="#3b34d5" />
             <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
                 <Stack>
                     <Stack.Screen name="(protected)" options={{ headerShown: false }} />
