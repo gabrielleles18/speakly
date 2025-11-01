@@ -4,6 +4,7 @@ export default function ProtectedLayout() {
     return (
         <Stack screenOptions={{ headerShown: false }}>
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="video" options={{ headerShown: false }} />
         </Stack>
     );
 }

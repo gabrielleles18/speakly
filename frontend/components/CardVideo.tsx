@@ -1,5 +1,6 @@
 import { Clock } from '@tamagui/lucide-icons';
-import { Image, TouchableOpacity } from 'react-native';
+import { useRouter } from 'expo-router';
+import { Image, Pressable } from 'react-native';
 import { Card, Paragraph, XStack, YStack } from 'tamagui';
 
 interface CardVideoProps {
@@ -7,11 +8,23 @@ interface CardVideoProps {
     description: string;
     duration: string;
     image: string;
+    id: string;
 }
 
-export default function CardVideo({ title, description, duration, image }: CardVideoProps) {
+export default function CardVideo({
+    title,
+    description,
+    duration,
+    image,
+    id = '1',
+}: CardVideoProps) {
+    const router = useRouter();
+
     return (
-        <TouchableOpacity>
+        <Pressable
+            onPress={() => router.push(`/video/${id}`)}
+            style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
+        >
             <Card
                 size="$4"
                 p="$3"
@@ -53,6 +66,6 @@ export default function CardVideo({ title, description, duration, image }: CardV
                     </XStack>
                 </YStack>
             </Card>
-        </TouchableOpacity>
+        </Pressable>
     );
 }

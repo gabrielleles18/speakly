@@ -1721,6 +1721,18 @@
   resolved "https://registry.npmjs.org/@radix-ui/react-use-layout-effect/-/react-use-layout-effect-1.1.1.tgz"
   integrity sha512-RbJRS4UWQFkzHTTwVymMTUv8EqYhOp8dOOviLj2ugtTiXRaRQS7GLGxZTLL1jWhMeoSCf5zmcZkqTl9IiYfXcQ==
 
+"@react-native-youtube-bridge/core@2.1.4":
+  version "2.1.4"
+  resolved "https://registry.npmjs.org/@react-native-youtube-bridge/core/-/core-2.1.4.tgz"
+  integrity sha512-iL2/+z2bhlq1rXSTdUfuWCeXxGsbkMbQYG24kiK2zl8Vaz8PCyFwK1OSJMMGFBv2gL2IIXMOdlF+BM5/4a+OFg==
+
+"@react-native-youtube-bridge/react@2.1.4":
+  version "2.1.4"
+  resolved "https://registry.npmjs.org/@react-native-youtube-bridge/react/-/react-2.1.4.tgz"
+  integrity sha512-Qz9gOPZKGwlCYA2jel9UwiTReNLpPlQ4WHi1RvWBdNAnfYEXdX/OWWEg3cD7UW340draMLasO1/Q4WTPSPDohA==
+  dependencies:
+    "@react-native-youtube-bridge/core" "2.1.4"
+
 "@react-native/assets-registry@0.81.5":
   version "0.81.5"
   resolved "https://registry.npmjs.org/@react-native/assets-registry/-/assets-registry-0.81.5.tgz"
@@ -2178,7 +2190,7 @@
 
 "@tamagui/compose-refs@1.135.7":
   version "1.135.7"
-  resolved "https://registry.yarnpkg.com/@tamagui/compose-refs/-/compose-refs-1.135.7.tgz#d6e29e2a8f6963d0290818f10b60f2bb823fdea0"
+  resolved "https://registry.npmjs.org/@tamagui/compose-refs/-/compose-refs-1.135.7.tgz"
   integrity sha512-n/GzO2rLA7/Qo6YhV5C10R+A0pRih+WyxHOce7faYw/jTMuOOLKlRWsCznKDRbUVhj+33doqcbIX01X+XT6c/A==
 
 "@tamagui/config-default@1.135.6":
@@ -2217,7 +2229,7 @@
 
 "@tamagui/constants@1.135.7":
   version "1.135.7"
-  resolved "https://registry.yarnpkg.com/@tamagui/constants/-/constants-1.135.7.tgz#dc549fe48ed7513e4faac3ff51892fbd22441bae"
+  resolved "https://registry.npmjs.org/@tamagui/constants/-/constants-1.135.7.tgz"
   integrity sha512-WGKKS9nKpAnLuOnuVS7cuEFlN+tsEiasAIiHe670SMzUhAluXmclJXLEjU89QPEh9BVG/5FXEQ1EKEpsMUbGtg==
 
 "@tamagui/core@1.135.6":
@@ -2235,7 +2247,7 @@
 
 "@tamagui/core@1.135.7":
   version "1.135.7"
-  resolved "https://registry.yarnpkg.com/@tamagui/core/-/core-1.135.7.tgz#e69ecfe6a65456c168d5244b81bb673e296c6e28"
+  resolved "https://registry.npmjs.org/@tamagui/core/-/core-1.135.7.tgz"
   integrity sha512-W5EEhewUjcmIPN7+5xQca/OLw0c6QT7UrbSjF/BcIzfZgqHyK7QOHGEYYQ4lASU6GucgvMcnG2fVL+cO4/1atw==
   dependencies:
     "@tamagui/helpers" "1.135.7"
@@ -2449,7 +2461,7 @@
 
 "@tamagui/helpers@1.135.7":
   version "1.135.7"
-  resolved "https://registry.yarnpkg.com/@tamagui/helpers/-/helpers-1.135.7.tgz#6173d0e97fa7cb0de03f9a421bec54938afb0065"
+  resolved "https://registry.npmjs.org/@tamagui/helpers/-/helpers-1.135.7.tgz"
   integrity sha512-N6YYjG2ssyvYxBcoBZVjX49ug9McgG4QZOvltZTzhewFRH356m8FUoYioLCbIVM5dD0MDoso0KMHWX7Hsvl3Jg==
   dependencies:
     "@tamagui/constants" "1.135.7"
@@ -2465,7 +2477,7 @@
 
 "@tamagui/image@^1.135.7":
   version "1.135.7"
-  resolved "https://registry.yarnpkg.com/@tamagui/image/-/image-1.135.7.tgz#34ab7c3e9005d3f2f8af7d2a610d4f09bd91ea5f"
+  resolved "https://registry.npmjs.org/@tamagui/image/-/image-1.135.7.tgz"
   integrity sha512-rqL6nvNDb9SRul1Wfdahzx+zHEX4HsFwG19d/RplU+lBHVpncCjVma/aocUdXRt1w4i1aR2e+WwzIxfeU8tTxw==
   dependencies:
     "@tamagui/constants" "1.135.7"
@@ -2478,7 +2490,7 @@
 
 "@tamagui/is-equal-shallow@1.135.7":
   version "1.135.7"
-  resolved "https://registry.yarnpkg.com/@tamagui/is-equal-shallow/-/is-equal-shallow-1.135.7.tgz#3069547282f241ba5326ccb94aa62f8201fcbf2c"
+  resolved "https://registry.npmjs.org/@tamagui/is-equal-shallow/-/is-equal-shallow-1.135.7.tgz"
   integrity sha512-gXt0fratoY5FXtN0OAPOYkaar+1J1pTuqHlKKTzLKsmsUW+ZDDC91Vq8Er2J8oYBRv7JDcBRrLf089TtDtlY0g==
 
 "@tamagui/label@1.135.6":
@@ -2497,7 +2509,7 @@
 
 "@tamagui/linear-gradient@1.135.6", "@tamagui/linear-gradient@^1.135.6":
   version "1.135.6"
-  resolved "https://registry.yarnpkg.com/@tamagui/linear-gradient/-/linear-gradient-1.135.6.tgz#395e5b3a4af4324a226372f3de745516d0ead5ca"
+  resolved "https://registry.npmjs.org/@tamagui/linear-gradient/-/linear-gradient-1.135.6.tgz"
   integrity sha512-lzdkzBYLP+8iEfHrkVLRLwqrLjajJXmJQl6pok/I8QXumE5m75Lv4kKBqxtECS5LOvQK88pyjKsJVtGYso7CNg==
   dependencies:
     "@tamagui/core" "1.135.6"
@@ -2534,7 +2546,7 @@
 
 "@tamagui/normalize-css-color@1.135.7":
   version "1.135.7"
-  resolved "https://registry.yarnpkg.com/@tamagui/normalize-css-color/-/normalize-css-color-1.135.7.tgz#1f26ac7cb28b281884706a796e585aed49fa3403"
+  resolved "https://registry.npmjs.org/@tamagui/normalize-css-color/-/normalize-css-color-1.135.7.tgz"
   integrity sha512-M6iPvsYfvsTX/IPt99lg2lB30cwGyRMoLOXNNKLWG0jauB/RnbJZlV2deyQ8M8voY5dLKWZt9X48D64YIjWHpg==
   dependencies:
     "@react-native/normalize-color" "^2.1.0"
@@ -2657,7 +2669,7 @@
 
 "@tamagui/react-native-media-driver@1.135.7":
   version "1.135.7"
-  resolved "https://registry.yarnpkg.com/@tamagui/react-native-media-driver/-/react-native-media-driver-1.135.7.tgz#891487193bf52772120dbab0c6f837ede91c113c"
+  resolved "https://registry.npmjs.org/@tamagui/react-native-media-driver/-/react-native-media-driver-1.135.7.tgz"
   integrity sha512-S0oU+afeBZkvn3uUwv1R3n9pcAMXLyHKc42RdHzdemFRV5RYdfX0GyVgtM8HXRjmmjvbLRniGab0aRSH5Gm5ww==
   dependencies:
     "@tamagui/web" "1.135.7"
@@ -2669,7 +2681,7 @@
 
 "@tamagui/react-native-use-pressable@1.135.7":
   version "1.135.7"
-  resolved "https://registry.yarnpkg.com/@tamagui/react-native-use-pressable/-/react-native-use-pressable-1.135.7.tgz#e6f44d32cb25d7dc8eb4a4cf659d8641117c7923"
+  resolved "https://registry.npmjs.org/@tamagui/react-native-use-pressable/-/react-native-use-pressable-1.135.7.tgz"
   integrity sha512-YVDwoORlI+hoDkkpz9Qk3QrNJKvzGdtdBRowQQuLJ1yPsg/T4IZSfrvnggAEr/fh1S46evhpj/6v5eJ2Rv/Asw==
 
 "@tamagui/react-native-use-responder-events@1.135.6":
@@ -2679,7 +2691,7 @@
 
 "@tamagui/react-native-use-responder-events@1.135.7":
   version "1.135.7"
-  resolved "https://registry.yarnpkg.com/@tamagui/react-native-use-responder-events/-/react-native-use-responder-events-1.135.7.tgz#a8ef06836a64b376ec5a34623b07f2c3d006f813"
+  resolved "https://registry.npmjs.org/@tamagui/react-native-use-responder-events/-/react-native-use-responder-events-1.135.7.tgz"
   integrity sha512-3z74zdt6sD+beHGIQoMCp/bQJpuECVY2ZWug6otyiadoQzhWOZwFuCmmXWf3J0KYvM9A5QkZ1qgQuYPGHJx4cA==
 
 "@tamagui/react-native-web-internals@1.135.6":
@@ -2819,7 +2831,7 @@
 
 "@tamagui/simple-hash@1.135.7":
   version "1.135.7"
-  resolved "https://registry.yarnpkg.com/@tamagui/simple-hash/-/simple-hash-1.135.7.tgz#9c93bdabbd03fb23793af88eaac13d1c6917d203"
+  resolved "https://registry.npmjs.org/@tamagui/simple-hash/-/simple-hash-1.135.7.tgz"
   integrity sha512-FXZ/tWJBT5hkJqTWXeDwnDTZOtHBPbgTovsq8nwzfps8cyP3zApYDgAbCY2qwTNrjLMktW6CrTTjE/kBCFL0Cw==
 
 "@tamagui/slider@1.135.6":
@@ -2982,7 +2994,7 @@
 
 "@tamagui/timer@1.135.7":
   version "1.135.7"
-  resolved "https://registry.yarnpkg.com/@tamagui/timer/-/timer-1.135.7.tgz#4c9691dc95e86c237a49fa47d0e9fd1421a59600"
+  resolved "https://registry.npmjs.org/@tamagui/timer/-/timer-1.135.7.tgz"
   integrity sha512-EG/OzBrGoLpfheNmCbsrP6awUD+Gj6ntBqrd6/+EfUoPCWtw59sN9fHw0KskRfxv10hsqPyiuPqh6fy8R2VmMw==
 
 "@tamagui/toggle-group@1.135.6":
@@ -3030,7 +3042,7 @@
 
 "@tamagui/types@1.135.7":
   version "1.135.7"
-  resolved "https://registry.yarnpkg.com/@tamagui/types/-/types-1.135.7.tgz#5098f777a2c31373f665ef296f72a18dd2fff3e7"
+  resolved "https://registry.npmjs.org/@tamagui/types/-/types-1.135.7.tgz"
   integrity sha512-B/aW4fMi0k/aDzsIqrU/ltJKvk3m7ViVQ4J6NaVQTUF/aZ7MUrc0Tj+ak1ush2oVGLzSjtaf73DBFM/nTJZjCQ==
 
 "@tamagui/use-async@1.135.6":
@@ -3068,7 +3080,7 @@
 
 "@tamagui/use-did-finish-ssr@1.135.7":
   version "1.135.7"
-  resolved "https://registry.yarnpkg.com/@tamagui/use-did-finish-ssr/-/use-did-finish-ssr-1.135.7.tgz#97e70eed76273e5a0e74db193bc885e09ccf9ec5"
+  resolved "https://registry.npmjs.org/@tamagui/use-did-finish-ssr/-/use-did-finish-ssr-1.135.7.tgz"
   integrity sha512-LBWdvgvlnGpMYxcpq9S0tBwTG0b9yre+kvbo0qTWdK9gY64G10NB37PUqeuxzCo3Qly8vF7WsyjrO1X6BH/jZw==
 
 "@tamagui/use-direction@1.135.6":
@@ -3086,7 +3098,7 @@
 
 "@tamagui/use-element-layout@1.135.7":
   version "1.135.7"
-  resolved "https://registry.yarnpkg.com/@tamagui/use-element-layout/-/use-element-layout-1.135.7.tgz#1e253faec39473e445116f689ad230bf264cb342"
+  resolved "https://registry.npmjs.org/@tamagui/use-element-layout/-/use-element-layout-1.135.7.tgz"
   integrity sha512-NBzBs3ZqCDk8pCG+wJ64DctN4icjvtbfVP1PfaGAlPgfXkREtieZWkPXVrqrJhM83MHoD3m1kwFVzIc4ngsB2Q==
   dependencies:
     "@tamagui/constants" "1.135.7"
@@ -3108,7 +3120,7 @@
 
 "@tamagui/use-event@1.135.7":
   version "1.135.7"
-  resolved "https://registry.yarnpkg.com/@tamagui/use-event/-/use-event-1.135.7.tgz#7e696d2ae362e67c5ca1ceba1c2b0fd15e7117ef"
+  resolved "https://registry.npmjs.org/@tamagui/use-event/-/use-event-1.135.7.tgz"
   integrity sha512-shV6VpFvmIFuzGI/epBPUCBbATROgyAXLOXICPAFUWzDziNgWwcGwS5+YgoAlgaBz1+WmEbqKPTazPYzPOhTXw==
   dependencies:
     "@tamagui/constants" "1.135.7"
@@ -3120,7 +3132,7 @@
 
 "@tamagui/use-force-update@1.135.7":
   version "1.135.7"
-  resolved "https://registry.yarnpkg.com/@tamagui/use-force-update/-/use-force-update-1.135.7.tgz#9fda86c45c7d85997a7e700fdf58afbfcd769302"
+  resolved "https://registry.npmjs.org/@tamagui/use-force-update/-/use-force-update-1.135.7.tgz"
   integrity sha512-xc9KSbddE2N7l56I011VXhO4SxY/+KCWkb16D/TvdOjJr0jRehsg1lJmYHQQx3Fxm0b2tcSBc5Cwy6F6scapVg==
 
 "@tamagui/use-keyboard-visible@1.135.6":
@@ -3172,7 +3184,7 @@
 
 "@tamagui/web@1.135.7":
   version "1.135.7"
-  resolved "https://registry.yarnpkg.com/@tamagui/web/-/web-1.135.7.tgz#43c4318184941edbbfce2687df8602e679347875"
+  resolved "https://registry.npmjs.org/@tamagui/web/-/web-1.135.7.tgz"
   integrity sha512-RTAhEMnisckxTcfmaBlDaQwA1X/tSkZZ4+/nlbL71lAHlYekpXMofzZIaqRc2HqOn7PKis1PC8sPhUn4yUkjoQ==
   dependencies:
     "@tamagui/compose-refs" "1.135.7"
@@ -3262,7 +3274,22 @@
   dependencies:
     undici-types "~7.16.0"
 
-"@types/react@~19.1.0":
+"@types/react-native-vector-icons@^6.4.6":
+  version "6.4.18"
+  resolved "https://registry.npmjs.org/@types/react-native-vector-icons/-/react-native-vector-icons-6.4.18.tgz"
+  integrity sha512-YGlNWb+k5laTBHd7+uZowB9DpIK3SXUneZqAiKQaj1jnJCZM0x71GDim5JCTMi4IFkhc9m8H/Gm28T5BjyivUw==
+  dependencies:
+    "@types/react" "*"
+    "@types/react-native" "^0.70"
+
+"@types/react-native@^0.70":
+  version "0.70.19"
+  resolved "https://registry.npmjs.org/@types/react-native/-/react-native-0.70.19.tgz"
+  integrity sha512-c6WbyCgWTBgKKMESj/8b4w+zWcZSsCforson7UdXtXMecG3MxCinYi6ihhrHVPyUrVzORsvEzK8zg32z4pK6Sg==
+  dependencies:
+    "@types/react" "*"
+
+"@types/react@*", "@types/react@~19.1.0":
   version "19.1.17"
   resolved "https://registry.npmjs.org/@types/react/-/react-19.1.17.tgz"
   integrity sha512-Qec1E3mhALmaspIrhWt9jkQMNdw6bReVu64mjvhbhq2NFPftLPVr+l1SZgmw/66WwBNpDh7ao5AT6gF5v41PFA==
@@ -3824,7 +3851,7 @@ clone@^1.0.2:
   resolved "https://registry.npmjs.org/clone/-/clone-1.0.4.tgz"
   integrity sha512-JQHZ2QMW6l3aH/j6xCqQThY/9OH4D/9ls34cgkUBiEeocRTU04tHfKPBsUK1PqZCUQM7GiA0IIXJSuXHI64Kbg==
 
-color-convert@^1.9.0:
+color-convert@^1.9.0, color-convert@^1.9.3:
   version "1.9.3"
   resolved "https://registry.npmjs.org/color-convert/-/color-convert-1.9.3.tgz"
   integrity sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==
@@ -3848,7 +3875,7 @@ color-name@^1.0.0, color-name@~1.1.4:
   resolved "https://registry.npmjs.org/color-name/-/color-name-1.1.4.tgz"
   integrity sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==
 
-color-string@^1.9.0:
+color-string@^1.6.0, color-string@^1.9.0:
   version "1.9.1"
   resolved "https://registry.npmjs.org/color-string/-/color-string-1.9.1.tgz"
   integrity sha512-shrVawQFojnZv6xM40anx4CkoDP+fZsw/ZerEMsW/pyzsRbElpsL/DBVW7q3ExxwusdNXI3lXpuhEZkzs8p5Eg==
@@ -3860,6 +3887,14 @@ color2k@^2.0.2:
   version "2.0.3"
   resolved "https://registry.npmjs.org/color2k/-/color2k-2.0.3.tgz"
   integrity sha512-zW190nQTIoXcGCaU08DvVNFTmQhUpnJfVuAKfWqUQkflXKpaDdpaYoM0iluLS9lgJNHyBF58KKA2FBEwkD7wog==
+
+color@^3.1.2:
+  version "3.2.1"
+  resolved "https://registry.npmjs.org/color/-/color-3.2.1.tgz"
+  integrity sha512-aBl7dZI9ENN6fUGC7mWpMTPNHmWUSNan9tuWN6ahh5ZLNk9baLJOnSMlrQkHcrfFgz2/RigjUVAjdx36VcemKA==
+  dependencies:
+    color-convert "^1.9.3"
+    color-string "^1.6.0"
 
 color@^4.2.3:
   version "4.2.3"
@@ -4034,7 +4069,7 @@ deep-extend@^0.6.0:
   resolved "https://registry.npmjs.org/deep-extend/-/deep-extend-0.6.0.tgz"
   integrity sha512-LOHxIOaPYdHlJRtCQfDIVZtfw/ufM8+rVj649RIHzcm/vGwQRXFt6OPqIFWsm2XEMrNIEtWR64sY1LEKD2vAOA==
 
-deepmerge@^4.3.1:
+deepmerge@^4.2.2, deepmerge@^4.3.1:
   version "4.3.1"
   resolved "https://registry.npmjs.org/deepmerge/-/deepmerge-4.3.1.tgz"
   integrity sha512-3sUqbMEc77XqpdNO7FRyRog+eW3ph+GYCbj+rK+uYyRMuwsVy0rMiVtPn+QJlKFvWP/1PYpapqYn0Me2knFn+A==
@@ -4262,6 +4297,11 @@ event-target-shim@^5.0.0:
   resolved "https://registry.npmjs.org/event-target-shim/-/event-target-shim-5.0.1.tgz"
   integrity sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==
 
+events@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.npmjs.org/events/-/events-3.3.0.tgz"
+  integrity sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==
+
 exec-async@^2.2.0:
   version "2.2.0"
   resolved "https://registry.npmjs.org/exec-async/-/exec-async-2.2.0.tgz"
@@ -4297,7 +4337,7 @@ expo-font@^14.0.9, expo-font@~14.0.9:
 
 expo-image@~3.0.10:
   version "3.0.10"
-  resolved "https://registry.yarnpkg.com/expo-image/-/expo-image-3.0.10.tgz#a589098c3688d76c6e238ae90e1efc06ac4902b0"
+  resolved "https://registry.npmjs.org/expo-image/-/expo-image-3.0.10.tgz"
   integrity sha512-i4qNCEf9Ur7vDqdfDdFfWnNCAF2efDTdahuDy9iELPS2nzMKBLeeGA2KxYEPuRylGCS96Rwm+SOZJu6INc2ADQ==
 
 expo-keep-awake@~15.0.7:
@@ -4307,7 +4347,7 @@ expo-keep-awake@~15.0.7:
 
 expo-linear-gradient@~15.0.7:
   version "15.0.7"
-  resolved "https://registry.yarnpkg.com/expo-linear-gradient/-/expo-linear-gradient-15.0.7.tgz#d1ebbda5ecc58afb58398f5a06affd0e83894149"
+  resolved "https://registry.npmjs.org/expo-linear-gradient/-/expo-linear-gradient-15.0.7.tgz"
   integrity sha512-yF+y+9Shpr/OQFfy/wglB/0bykFMbwHBTuMRa5Of/r2P1wbkcacx8rg0JsUWkXH/rn2i2iWdubyqlxSJa3ggZA==
 
 expo-linking@~8.0.8:
@@ -4738,6 +4778,13 @@ hey-listen@^1.0.8:
   resolved "https://registry.npmjs.org/hey-listen/-/hey-listen-1.0.8.tgz"
   integrity sha512-COpmrF2NOg4TBWUJ5UVyaCU2A88wEMkUPK4hNqyCkqHbxT92BbvfjoSozkAIIm6XhicGlJHhFdullInrdhwU8Q==
 
+hoist-non-react-statics@^3.3.2:
+  version "3.3.2"
+  resolved "https://registry.npmjs.org/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz"
+  integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
+  dependencies:
+    react-is "^16.7.0"
+
 hosted-git-info@^7.0.0:
   version "7.0.2"
   resolved "https://registry.npmjs.org/hosted-git-info/-/hosted-git-info-7.0.2.tgz"
@@ -4816,7 +4863,7 @@ inline-style-prefixer@^7.0.1:
   dependencies:
     css-in-js-utils "^3.1.0"
 
-invariant@^2.2.4:
+invariant@2.2.4, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.npmjs.org/invariant/-/invariant-2.2.4.tgz"
   integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
@@ -5195,6 +5242,11 @@ lodash.debounce@^4.0.8:
   resolved "https://registry.npmjs.org/lodash.debounce/-/lodash.debounce-4.0.8.tgz"
   integrity sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==
 
+lodash.isequal@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.npmjs.org/lodash.isequal/-/lodash.isequal-4.5.0.tgz"
+  integrity sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==
+
 lodash.throttle@^4.1.1:
   version "4.1.1"
   resolved "https://registry.npmjs.org/lodash.throttle/-/lodash.throttle-4.1.1.tgz"
@@ -5204,6 +5256,11 @@ lodash.truncate@^4.4.2:
   version "4.4.2"
   resolved "https://registry.npmjs.org/lodash.truncate/-/lodash.truncate-4.4.2.tgz"
   integrity sha512-jttmRe7bRse52OsWIMDLaXxWqRAmtIUccAQ3garviCqJjafXOfNMO0yMfNpdD6zbGaTU0P5Nz7e7gAT6cKmJRw==
+
+lodash@^4.17.15:
+  version "4.17.21"
+  resolved "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz"
+  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
 
 log-symbols@^2.2.0:
   version "2.2.0"
@@ -5691,6 +5748,11 @@ open@^8.0.4:
     is-docker "^2.1.1"
     is-wsl "^2.2.0"
 
+opencollective-postinstall@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.npmjs.org/opencollective-postinstall/-/opencollective-postinstall-2.0.3.tgz"
+  integrity sha512-8AV/sCtuzUeTo8gQK5qDZzARrulB3egtLzFgteqB2tcT4Mw7B8Kt7JcDHmltjz6FOAHsvTevk70gZEbhM4ZS9Q==
+
 ora@^3.4.0:
   version "3.4.0"
   resolved "https://registry.npmjs.org/ora/-/ora-3.4.0.tgz"
@@ -5986,6 +6048,11 @@ react-hook-form@^7.65.0:
   resolved "https://registry.npmjs.org/react-hook-form/-/react-hook-form-7.65.0.tgz"
   integrity sha512-xtOzDz063WcXvGWaHgLNrNzlsdFgtUWcb32E6WFaGTd7kPZG3EeDusjdZfUsPwKCKVXy1ZlntifaHZ4l8pAsmw==
 
+react-is@^16.7.0:
+  version "16.13.1"
+  resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
+  integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
+
 react-is@^18.0.0:
   version "18.3.1"
   resolved "https://registry.npmjs.org/react-is/-/react-is-18.3.1.tgz"
@@ -5996,6 +6063,20 @@ react-is@^19.1.0:
   resolved "https://registry.npmjs.org/react-is/-/react-is-19.2.0.tgz"
   integrity sha512-x3Ax3kNSMIIkyVYhWPyO09bu0uttcAIoecO/um/rKGQ4EltYWVYtyiGkS/3xMynrbVQdS69Jhlv8FXUEZehlzA==
 
+react-native-elements@^3.4.3:
+  version "3.4.3"
+  resolved "https://registry.npmjs.org/react-native-elements/-/react-native-elements-3.4.3.tgz"
+  integrity sha512-VtZc25EecPZyUBER85zFK9ZbY6kkUdcm1ZwJ9hdoGSCr1R/GFgxor4jngOcSYeMvQ+qimd5No44OVJW3rSJECA==
+  dependencies:
+    "@types/react-native-vector-icons" "^6.4.6"
+    color "^3.1.2"
+    deepmerge "^4.2.2"
+    hoist-non-react-statics "^3.3.2"
+    lodash.isequal "^4.5.0"
+    opencollective-postinstall "^2.0.3"
+    react-native-ratings "8.0.4"
+    react-native-size-matters "^0.3.1"
+
 react-native-is-edge-to-edge@^1.1.6, react-native-is-edge-to-edge@^1.2.1:
   version "1.2.1"
   resolved "https://registry.npmjs.org/react-native-is-edge-to-edge/-/react-native-is-edge-to-edge-1.2.1.tgz"
@@ -6005,6 +6086,13 @@ react-native-logs@^5.5.0:
   version "5.5.0"
   resolved "https://registry.npmjs.org/react-native-logs/-/react-native-logs-5.5.0.tgz"
   integrity sha512-H3Jc1pNTzNhYb9yHuk1drHdyGHwRvt4IERSz3EUul8vVTey6999fzGRFLK6ugrxYnmw7P+5fo/mRzDXeByhA8g==
+
+react-native-ratings@8.0.4:
+  version "8.0.4"
+  resolved "https://registry.npmjs.org/react-native-ratings/-/react-native-ratings-8.0.4.tgz"
+  integrity sha512-Xczu5lskIIRD6BEdz9A0jDRpEck/SFxRqiglkXi0u67yAtI1/pcJC76P4MukCbT8K4BPVl+42w83YqXBoBRl7A==
+  dependencies:
+    lodash "^4.17.15"
 
 react-native-reanimated@~4.1.1:
   version "4.1.3"
@@ -6027,6 +6115,11 @@ react-native-screens@~4.16.0:
     react-freeze "^1.0.0"
     react-native-is-edge-to-edge "^1.2.1"
     warn-once "^0.1.0"
+
+react-native-size-matters@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.npmjs.org/react-native-size-matters/-/react-native-size-matters-0.3.1.tgz"
+  integrity sha512-mKOfBLIBFBcs9br1rlZDvxD5+mAl8Gfr5CounwJtxI6Z82rGrMO+Kgl9EIg3RMVf3G855a85YVqHJL2f5EDRlw==
 
 react-native-svg@^15.14.0:
   version "15.14.0"
@@ -6065,6 +6158,14 @@ react-native-web@~0.21.0:
     postcss-value-parser "^4.2.0"
     styleq "^0.1.3"
 
+react-native-webview@^13.16.0:
+  version "13.16.0"
+  resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-13.16.0.tgz#c995148f944a7eaf12389f0e6d5c6f5e6a775686"
+  integrity sha512-Nh13xKZWW35C0dbOskD7OX01nQQavOzHbCw9XoZmar4eXCo7AvrYJ0jlUfRVVIJzqINxHlpECYLdmAdFsl9xDA==
+  dependencies:
+    escape-string-regexp "^4.0.0"
+    invariant "2.2.4"
+
 react-native-worklets@0.5.1:
   version "0.5.1"
   resolved "https://registry.npmjs.org/react-native-worklets/-/react-native-worklets-0.5.1.tgz"
@@ -6081,6 +6182,21 @@ react-native-worklets@0.5.1:
     "@babel/preset-typescript" "^7.16.7"
     convert-source-map "^2.0.0"
     semver "7.7.2"
+
+react-native-youtube-bridge@^2.1.4:
+  version "2.1.4"
+  resolved "https://registry.npmjs.org/react-native-youtube-bridge/-/react-native-youtube-bridge-2.1.4.tgz"
+  integrity sha512-T172W0q4y1xt7+gyYha2gbHLUdVX5qGrtZmgq/yuV8dYWPdR/JarygCWxpS1RVcnqGIK6RXcR2dL3efhm0RJiw==
+  dependencies:
+    "@react-native-youtube-bridge/core" "2.1.4"
+    "@react-native-youtube-bridge/react" "2.1.4"
+
+react-native-youtube-iframe@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.npmjs.org/react-native-youtube-iframe/-/react-native-youtube-iframe-2.4.1.tgz"
+  integrity sha512-MIzVlQYp6sc/Z7b0YwluALd0UbACQ7vscpcVVTmcHvQ5ujN2f6LJdDFxI++xy7TUeJS73k8vBdlznb5bT/P/Gg==
+  dependencies:
+    events "^3.3.0"
 
 react-native@0.81.5:
   version "0.81.5"

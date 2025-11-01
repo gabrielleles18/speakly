@@ -10,8 +10,13 @@ export default function TabOneScreen() {
     const theme = useTheme();
 
     return (
-        <SafeAreaView>
-            <ScrollView showsVerticalScrollIndicator={false} bg="$background">
+        <SafeAreaView style={{ flex: 1 }} edges={['top']}>
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                style={{ flex: 1 }}
+                contentContainerStyle={{ flexGrow: 1 }}
+                backgroundColor="$background"
+            >
                 <LinearGradient
                     colors={[theme.blue4.val, theme.green8.val]}
                     locations={[0.5, 1]}
@@ -103,7 +108,6 @@ export default function TabOneScreen() {
                     <Heading size="$2" p="$0" mb="$4">
                         Recommended videos
                     </Heading>
-
                     <YStack gap="$3">
                         <CardVideo />
                         <CardVideo />
