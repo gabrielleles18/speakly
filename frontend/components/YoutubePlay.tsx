@@ -27,7 +27,7 @@ function YoutubePlay({ videoId }: { videoId: string }) {
     const player = useYouTubePlayer(videoId, YouTubeInitialProps);
 
     const [isPlaying, setIsPlaying] = useState(false);
-    const [currentTime, setCurrentTime] = useState(0);
+    const [currentTime, setCurrentTime] = useState<number>();
     const flatListRef = useRef<FlatList>(null);
     const lastActiveIndexRef = useRef<number | null>(null);
 
@@ -64,12 +64,24 @@ function YoutubePlay({ videoId }: { videoId: string }) {
         const timeNow = await player.getCurrentTime();
         if (timeNow === undefined) return;
 
-        const getNextSubtitle = getActiveSubtitleIndex();
-        console.log(getNextSubtitle);
+        const currentSubtitle = getActiveSubtitleIndex();
+        if (!currentSubtitle) return;
+        const nextSubtitleIndex = subtitles.find((subtitle) => {
+            if (type === 'forward') {
+                return subtitle.id === currentSubtitle.subtitle.id + 1;
+            } else {
+                return subtitle.id === currentSubtitle.subtitle.id - 1;
+            }
+        });
 
-        const newTime = type === 'backward' ? timeNow - 10 : timeNow + 10;
-        player.seekTo(newTime, true);
-        setCurrentTime(newTime);
+        //const timeToSeek =  parseTimeToMilliseconds(nextSubtitleIndex?.start || '00:00:00,000');
+        const timeToSeek = nextSubtitleIndex?.start ?? '00:00:00,000';
+        // Converter milissegundos para segundos (número decimal)
+        const timeToSeekSeconds = parseTimeToMilliseconds(timeToSeek) / 1000;
+        console.log({ timeToSeekSeconds });
+
+        player.seekTo(timeToSeekSeconds, true);
+        setCurrentTime(timeToSeekSeconds * 1000);
     };
 
     const pretifyTime = (time: string) => {
@@ -106,8 +118,10 @@ function YoutubePlay({ videoId }: { videoId: string }) {
     };
 
     // Encontra o índice da legenda ativa no momento atual
-    const getActiveSubtitleIndex = useCallback((): number | null => {
+    const getActiveSubtitleIndex = useCallback((): { index: number; subtitle: any } | null => {
         const currentMilliseconds = currentTime * 1000;
+
+        console.log('currentTime', currentTime);
 
         // Procura pela legenda que está ativa no momento
         for (let i = 0; i < subtitles.length; i++) {
@@ -119,7 +133,7 @@ function YoutubePlay({ videoId }: { videoId: string }) {
                 currentMilliseconds >= startMilliseconds &&
                 currentMilliseconds <= endMilliseconds
             ) {
-                return i;
+                return { index: i, subtitle };
             }
         }
 
@@ -128,22 +142,22 @@ function YoutubePlay({ videoId }: { videoId: string }) {
             const subtitle = subtitles[i];
             const startMilliseconds = parseTimeToMilliseconds(subtitle.start);
             if (currentMilliseconds < startMilliseconds) {
-                return Math.max(0, i); // Retorna a próxima ou a primeira
+                return { index: Math.max(0, i), subtitle }; // Retorna a próxima ou a primeira
             }
         }
 
         // Se já passou de tudo, retorna a última
-        return subtitles.length - 1;
+        return { index: subtitles.length - 1, subtitle: subtitles[subtitles.length - 1] };
     }, [currentTime]);
 
     // Scroll automático para manter a legenda ativa no topo
     useEffect(() => {
-        const activeIndex = getActiveSubtitleIndex();
-        if (
-            activeIndex !== null &&
-            activeIndex !== lastActiveIndexRef.current &&
-            flatListRef.current
-        ) {
+        const activeIndexObject = getActiveSubtitleIndex();
+        if (!activeIndexObject) return;
+
+        const activeIndex = activeIndexObject.index;
+
+        if (activeIndex !== lastActiveIndexRef.current && flatListRef.current) {
             lastActiveIndexRef.current = activeIndex;
             flatListRef.current.scrollToIndex({
                 index: activeIndex,
@@ -152,6 +166,8 @@ function YoutubePlay({ videoId }: { videoId: string }) {
             });
         }
     }, [currentTime, getActiveSubtitleIndex]);
+
+    console.log(currentTime);
 
     return (
         <View gap="$4" flex={1}>
