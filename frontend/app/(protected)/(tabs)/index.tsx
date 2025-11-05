@@ -44,10 +44,10 @@ export default function TabOneScreen() {
                             <Video size="$1.5" />
                         </Card>
                         <View gap="$1">
-                            <Heading size="$2" p="$0">
+                            <Heading size="$3" p="$0">
                                 Learn English with videos ✨
                             </Heading>
-                            <Paragraph size="$1" color="$white3">
+                            <Paragraph size="$2" color="$white3">
                                 Thousands of videos for you to practice.
                             </Paragraph>
                         </View>
@@ -64,6 +64,8 @@ export default function TabOneScreen() {
                                 gap="$3"
                                 alignItems="center"
                                 flexDirection="row"
+                                borderWidth={1}
+                                borderColor="rgba(255, 255, 255, 0.09)"
                             >
                                 <TrendingUp size="$1" color="$white8" />
 
@@ -88,6 +90,8 @@ export default function TabOneScreen() {
                                 flexDirection="row"
                                 gap="$3"
                                 alignItems="center"
+                                borderWidth={1}
+                                borderColor="rgba(255, 255, 255, 0.09)"
                             >
                                 <Video size="$1" color="$white8" />
 

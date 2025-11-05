@@ -1,9 +1,16 @@
 import { subtitles } from '@/util/subtitleTest';
-import { ArrowLeftToLine, ArrowRightToLine, Pause, Play } from '@tamagui/lucide-icons';
+import {
+    ArrowLeftToLine,
+    ArrowRightToLine,
+    BookOpen,
+    Mic,
+    Pause,
+    Play,
+} from '@tamagui/lucide-icons';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { FlatList, TouchableOpacity } from 'react-native';
 import { YoutubeView, useYouTubePlayer } from 'react-native-youtube-bridge';
-import { Card, Circle, ColorTokens, Paragraph, View, XStack } from 'tamagui';
+import { Card, Circle, ColorTokens, Paragraph, Progress, View, XStack } from 'tamagui';
 
 const YouTubeInitialProps = {
     autoplay: false,
@@ -170,8 +177,13 @@ function YoutubePlay({ videoId }: { videoId: string }) {
     console.log(currentTime);
 
     return (
-        <View gap="$4" flex={1}>
+        <View flex={1}>
             <YoutubeView player={player} height={240} />
+
+            <Progress size="$4" value={7} background="$green8" height={8} mb="$4" borderRadius="$0">
+                <Progress.Indicator animation="bouncy" background="$green8" borderRadius="$0" />
+            </Progress>
+
             <XStack px="$4" flex={1}>
                 <FlatList
                     ref={flatListRef}
@@ -198,13 +210,25 @@ function YoutubePlay({ videoId }: { videoId: string }) {
                             backgroundColor={getTimeColor(start, end, currentTime)}
                             p="$3"
                             borderRadius="$4"
+                            gap="$2"
                             mb="$2"
                             minHeight={40}
                         >
-                            <Paragraph size="$1" color="$green8">
-                                {pretifyTime(end)}
-                            </Paragraph>
-                            <Paragraph size="$6" color="$white3" lineHeight="$4">
+                            <XStack alignItems="center" justifyContent="space-between" flex={1}>
+                                <Paragraph size="$1" color="$green8">
+                                    {pretifyTime(end)}
+                                </Paragraph>
+
+                                <XStack alignItems="center" gap="$5">
+                                    <TouchableOpacity onPress={() => {}}>
+                                        <BookOpen size="$1" color="$yellow8" p="$1" />
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => {}}>
+                                        <Mic size="$1" color="$blue8" p="$1" />
+                                    </TouchableOpacity>
+                                </XStack>
+                            </XStack>
+                            <Paragraph size="$5" color="$white3" lineHeight="$4">
                                 {text}
                             </Paragraph>
                         </Card>
