@@ -1,5 +1,5 @@
 import YoutubePlay from '@/components/YoutubePlay';
-import { ArrowLeft } from '@tamagui/lucide-icons';
+import { ArrowLeft, Heart } from '@tamagui/lucide-icons';
 import { useRouter } from 'expo-router';
 import { TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -22,6 +22,9 @@ export default function VideoSingleScreen() {
                     py="$4"
                     gap="$5"
                     boxShadow="0 0 10px 0 rgba(0, 0, 0, 0.1)"
+                    flexDirection="row"
+                    justifyContent="space-between"
+                    alignItems="center"
                 >
                     <XStack alignItems="center" gap="$4">
                         <TouchableOpacity onPress={() => router.back()} style={{ padding: 5 }}>
@@ -34,6 +37,9 @@ export default function VideoSingleScreen() {
                             </Paragraph>
                         </YStack>
                     </XStack>
+                    <TouchableOpacity onPress={() => {}} style={{ padding: 2 }}>
+                        <Heart size="$1" />
+                    </TouchableOpacity>
                 </LinearGradient>
                 <YoutubePlay videoId="_K-L9uhsBLM" />
             </YStack>

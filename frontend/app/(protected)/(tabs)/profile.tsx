@@ -57,7 +57,7 @@ export default function ProfileScreen() {
     const calendario = gerarCalendario();
 
     return (
-        <SafeAreaView>
+        <SafeAreaView style={{ flex: 1 }} edges={['top']}>
             <ScrollView showsVerticalScrollIndicator={false} backgroundColor="$background">
                 <LinearGradient
                     colors={[theme.blue4.val, theme.green8.val]}
@@ -68,7 +68,7 @@ export default function ProfileScreen() {
                     borderBottomRightRadius="$10"
                     px="$4"
                     py="$4"
-                    pb="$7"
+                    pb="$5"
                     gap="$5"
                     boxShadow="0 0 10px 0 rgba(0, 0, 0, 0.1)"
                 >

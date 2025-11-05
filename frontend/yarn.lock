@@ -2191,6 +2191,19 @@
     "@tamagui/stacks" "1.135.6"
     "@tamagui/use-controllable-state" "1.135.6"
 
+"@tamagui/collection@1.136.1":
+  version "1.136.1"
+  resolved "https://registry.yarnpkg.com/@tamagui/collection/-/collection-1.136.1.tgz#bb1bc413ea94492276888f228daea91249f939cd"
+  integrity sha512-5XevnC2/RD8IaxTUl1tkfi+uG01VvARc+9Gp1hWOrNK3QQ6ucONjBDZBM9Olp1fl9bg+PwTtSgNPVoyZk/rZsw==
+  dependencies:
+    "@tamagui/compose-refs" "1.136.1"
+    "@tamagui/constants" "1.136.1"
+    "@tamagui/core" "1.136.1"
+    "@tamagui/create-context" "1.136.1"
+    "@tamagui/polyfill-dev" "1.136.1"
+    "@tamagui/stacks" "1.136.1"
+    "@tamagui/use-controllable-state" "1.136.1"
+
 "@tamagui/colors@1.135.6":
   version "1.135.6"
   resolved "https://registry.npmjs.org/@tamagui/colors/-/colors-1.135.6.tgz"
@@ -2493,6 +2506,17 @@
     "@tamagui/stacks" "1.135.6"
     "@tamagui/use-controllable-state" "1.135.6"
 
+"@tamagui/group@1.136.1":
+  version "1.136.1"
+  resolved "https://registry.yarnpkg.com/@tamagui/group/-/group-1.136.1.tgz#7805fcdece36b8a1c3f95ab9132a35dd8a91b329"
+  integrity sha512-riu1g2rIH8agHpCI0/9MJptUMObiaQ+nsu1rUPfBBgUJfwkehSDvnE5Yq6VTZzHmO2y7dgByeTGDCw/MWZKAJg==
+  dependencies:
+    "@tamagui/core" "1.136.1"
+    "@tamagui/create-context" "1.136.1"
+    "@tamagui/helpers" "1.136.1"
+    "@tamagui/stacks" "1.136.1"
+    "@tamagui/use-controllable-state" "1.136.1"
+
 "@tamagui/helpers-icon@1.135.6":
   version "1.135.6"
   resolved "https://registry.npmjs.org/@tamagui/helpers-icon/-/helpers-icon-1.135.6.tgz"
@@ -2655,6 +2679,11 @@
   version "1.135.6"
   resolved "https://registry.npmjs.org/@tamagui/polyfill-dev/-/polyfill-dev-1.135.6.tgz"
   integrity sha512-y4DhIPopI9duYSKHBM1e9rSGaaEuuJDiVeAb7DbvyEDS0wwupD2+BTWqFkG/EKJOsF99GAr5bOr0KSzysqUKyw==
+
+"@tamagui/polyfill-dev@1.136.1":
+  version "1.136.1"
+  resolved "https://registry.yarnpkg.com/@tamagui/polyfill-dev/-/polyfill-dev-1.136.1.tgz#442bab53f3a384c6ce396ab0b51aa1cb1a672d19"
+  integrity sha512-9GNQQcoVyLEE8isi8NGpDSlw4ZHVTn4Hz8J1V4uU9ozpiSv+Vcwd97Ky8gOOtwbF6tjGhWFBMDvo1k/fxL173w==
 
 "@tamagui/popover@1.135.6":
   version "1.135.6"
@@ -2856,6 +2885,21 @@
     "@tamagui/use-direction" "1.135.6"
     "@tamagui/use-event" "1.135.6"
 
+"@tamagui/roving-focus@1.136.1":
+  version "1.136.1"
+  resolved "https://registry.yarnpkg.com/@tamagui/roving-focus/-/roving-focus-1.136.1.tgz#9ffda7dba58c24a917cd05845e4cdfb804f6a0de"
+  integrity sha512-kb65SAsYeMRmMtmXlRYe8l5jWx/wT1O0eg/BT/+Xjbh1n1v33ylTgCeEKL/cKTuubOWPl56qeIdv+7PgpXgvTw==
+  dependencies:
+    "@tamagui/collection" "1.136.1"
+    "@tamagui/compose-refs" "1.136.1"
+    "@tamagui/constants" "1.136.1"
+    "@tamagui/core" "1.136.1"
+    "@tamagui/create-context" "1.136.1"
+    "@tamagui/helpers" "1.136.1"
+    "@tamagui/use-controllable-state" "1.136.1"
+    "@tamagui/use-direction" "1.136.1"
+    "@tamagui/use-event" "1.136.1"
+
 "@tamagui/scroll-view@1.135.6":
   version "1.135.6"
   resolved "https://registry.npmjs.org/@tamagui/scroll-view/-/scroll-view-1.135.6.tgz"
@@ -3009,6 +3053,11 @@
   resolved "https://registry.npmjs.org/@tamagui/start-transition/-/start-transition-1.135.6.tgz"
   integrity sha512-o2ZVukDo6GGViOpPlW5q0HwJXG8rSkN+UtRkF/A0vMai5SEwVT9XFnBz+Mo06LmTbdtgV4p0qLX3SvyIrNVhdw==
 
+"@tamagui/start-transition@1.136.1":
+  version "1.136.1"
+  resolved "https://registry.yarnpkg.com/@tamagui/start-transition/-/start-transition-1.136.1.tgz#145a938cb778b91ecb363ab99e4f863bfd103a79"
+  integrity sha512-JHXu0TejwuRADRHyy5lQEFipUOmPBLkvBcnHp0F7w6WtsM84uPBmKJRruhoBGVzrZkspH5KA6zgc3krbVnqpyw==
+
 "@tamagui/static@1.135.6":
   version "1.135.6"
   resolved "https://registry.npmjs.org/@tamagui/static/-/static-1.135.6.tgz"
@@ -3094,6 +3143,24 @@
     "@tamagui/use-controllable-state" "1.135.6"
     "@tamagui/use-direction" "1.135.6"
     "@tamagui/web" "1.135.6"
+
+"@tamagui/tabs@^1.136.1":
+  version "1.136.1"
+  resolved "https://registry.yarnpkg.com/@tamagui/tabs/-/tabs-1.136.1.tgz#c2b3d77179ff8dcf9895e068c213d1b3a97c56b2"
+  integrity sha512-LgF/5ohLj2FkESvmvHCYn955suSIfmuKIyeCaFMILtSJ7S62Rwfqi9kWdAHoHUNtT+81XcPnMwkVNoAenVoXKQ==
+  dependencies:
+    "@tamagui/compose-refs" "1.136.1"
+    "@tamagui/constants" "1.136.1"
+    "@tamagui/core" "1.136.1"
+    "@tamagui/create-context" "1.136.1"
+    "@tamagui/get-button-sized" "1.136.1"
+    "@tamagui/group" "1.136.1"
+    "@tamagui/helpers" "1.136.1"
+    "@tamagui/roving-focus" "1.136.1"
+    "@tamagui/stacks" "1.136.1"
+    "@tamagui/use-controllable-state" "1.136.1"
+    "@tamagui/use-direction" "1.136.1"
+    "@tamagui/web" "1.136.1"
 
 "@tamagui/text@1.135.6":
   version "1.135.6"
@@ -3233,6 +3300,14 @@
     "@tamagui/start-transition" "1.135.6"
     "@tamagui/use-event" "1.135.6"
 
+"@tamagui/use-controllable-state@1.136.1":
+  version "1.136.1"
+  resolved "https://registry.yarnpkg.com/@tamagui/use-controllable-state/-/use-controllable-state-1.136.1.tgz#45d77314742ba8e8b337d1cee1e3c6af362ac0c2"
+  integrity sha512-vOcF2LeHwJr04LPBq9fg/4Mou9TD7mSKjJsfNpEM4aZ0oIK0/RKq+S2MUG3tvJqyZ3XiZFtYnzH176YvJ+GmpQ==
+  dependencies:
+    "@tamagui/start-transition" "1.136.1"
+    "@tamagui/use-event" "1.136.1"
+
 "@tamagui/use-debounce@1.135.6":
   version "1.135.6"
   resolved "https://registry.npmjs.org/@tamagui/use-debounce/-/use-debounce-1.135.6.tgz"
@@ -3257,6 +3332,11 @@
   version "1.135.6"
   resolved "https://registry.npmjs.org/@tamagui/use-direction/-/use-direction-1.135.6.tgz"
   integrity sha512-OGNmk1cIOzyyPvlXSKyyZZzzbE1/tIiFvvGNjhVhlTD2l0rD0fcICabCiIUKn+Z4PulGEbNA6mQ2/aln+CZ1vg==
+
+"@tamagui/use-direction@1.136.1":
+  version "1.136.1"
+  resolved "https://registry.yarnpkg.com/@tamagui/use-direction/-/use-direction-1.136.1.tgz#490faf2211d0f0ff37ac4863d690099689ade3f9"
+  integrity sha512-cK6casTplR1JmIQ1k/FeTIe/ZrH5/VqA6QmlejBa/IqVYQeUzRRSCSUxfZFlA8nBa/k174QR2vpkNvAaeGrCPw==
 
 "@tamagui/use-element-layout@1.135.6":
   version "1.135.6"

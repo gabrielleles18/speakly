@@ -23,6 +23,7 @@
     "@tamagui/linear-gradient": "^1.135.6",
     "@tamagui/lucide-icons": "^1.135.6",
     "@tamagui/separator": "^1.136.1",
+    "@tamagui/tabs": "^1.136.1",
     "dayjs": "^1.11.19",
     "expo": "~54.0.20",
     "expo-constants": "~18.0.10",

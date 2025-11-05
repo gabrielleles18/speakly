@@ -67,7 +67,7 @@ export default function TabOneScreen() {
                                 borderWidth={1}
                                 borderColor="rgba(255, 255, 255, 0.09)"
                             >
-                                <TrendingUp size="$1" color="$white8" />
+                                <TrendingUp size="$1" color="$green10" />
 
                                 <View>
                                     <Paragraph size="$1" color="$white8" lineHeight="$0.5">
@@ -93,7 +93,7 @@ export default function TabOneScreen() {
                                 borderWidth={1}
                                 borderColor="rgba(255, 255, 255, 0.09)"
                             >
-                                <Video size="$1" color="$white8" />
+                                <Video size="$1" color="$blue10" />
 
                                 <View>
                                     <Paragraph size="$1" color="$white8" lineHeight="$0.5">
