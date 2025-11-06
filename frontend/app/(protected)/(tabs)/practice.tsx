@@ -197,13 +197,25 @@ export default function PracticeScreen() {
                         <YStack gap="$3" m="$4">
                             {selectedTab === 'all' && (
                                 <>
-                                    <CardSentence />
-                                    <CardSentence />
+                                    <CardSentence
+                                        sentence="Table for two, please."
+                                        translation="Mesa para dois, por favor."
+                                        reviewDate="05/11/2025"
+                                    />
+                                    <CardSentence
+                                        sentence="Hello, how are you?"
+                                        translation="Olá, como você está?"
+                                        reviewDate="12/11/2025"
+                                    />
                                 </>
                             )}
                             {selectedTab === 'reviewed' && (
                                 <>
-                                    <CardSentence />
+                                    <CardSentence
+                                        sentence="Hello, how are you?"
+                                        translation="Olá, como você está?"
+                                        reviewDate="08/11/2025"
+                                    />
                                 </>
                             )}
                         </YStack>
