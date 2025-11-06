@@ -1,5 +1,6 @@
 import CardSentence from '@/components/CardSentence';
 import { BookOpen } from '@tamagui/lucide-icons';
+import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {
@@ -19,6 +20,7 @@ import { LinearGradient } from 'tamagui/linear-gradient';
 export default function PracticeScreen() {
     const theme = useTheme();
     const [selectedTab, setSelectedTab] = useState<'all' | 'reviewed' | 'dominated'>('all');
+    const router = useRouter();
 
     return (
         <SafeAreaView style={{ flex: 1 }} edges={['top']}>
@@ -145,7 +147,14 @@ export default function PracticeScreen() {
                                     2 sentences to review today
                                 </Paragraph>
                             </YStack>
-                            <Button backgroundColor="$white3">
+                            <Button
+                                backgroundColor="$white3"
+                                onPress={() => router.push('/pronunciation')}
+                                pressStyle={{
+                                    backgroundColor: '$white4',
+                                    opacity: 0.7,
+                                }}
+                            >
                                 <Paragraph size="$4" color="$black5" fontWeight="bold">
                                     Review
                                 </Paragraph>
