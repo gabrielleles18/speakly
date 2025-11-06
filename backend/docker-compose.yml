@@ -1,0 +1,60 @@
+services:
+    # image project
+    app:
+        container_name: ${APP_NAME:-speakly}-app
+        build:
+            context: .
+            dockerfile: Dockerfile
+        restart: unless-stopped
+        working_dir: /var/www/laravel
+        volumes:
+            - ./laravel:/var/www/laravel
+        ports:
+            - "8080:8080" #reverb port
+        networks:
+            - laravel
+        env_file:
+            - .env
+    # nginx
+    nginx:
+        container_name: ${APP_NAME:-speakly}-nginx
+        image: nginx:alpine
+        restart: unless-stopped
+        ports:
+            - "8983:80"
+        volumes:
+            - ./laravel:/var/www/laravel
+            - ./docker/nginx/:/etc/nginx/conf.d/
+        networks:
+            - laravel
+    # db mysql
+    db:
+        container_name: ${APP_NAME:-speakly}-db
+        image: mysql:5.7.22
+        platform: linux/x86_64
+        restart: unless-stopped
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE:-laravel}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
+            MYSQL_PASSWORD: ${DB_PASSWORD:-pass}
+            MYSQL_USER: ${DB_USERNAME:-user}
+        volumes:
+            - ./.docker/mysql/dbdata:/var/lib/mysql
+        ports:
+            - "3383:3306"
+        networks:
+            - laravel
+    phpmyadmin:
+        container_name: ${APP_NAME:-speakly}-phpmyadmin
+        image: phpmyadmin/phpmyadmin
+        restart: unless-stopped
+        environment:
+            PMA_HOST: db
+            PMA_PORT: 3306
+        ports:
+            - "8085:80"
+        networks:
+            - laravel
+networks:
+    laravel:
+        driver: bridge
