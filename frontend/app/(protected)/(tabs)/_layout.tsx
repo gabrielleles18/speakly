@@ -4,7 +4,7 @@ import React from 'react';
 import { useTheme } from 'tamagui';
 
 export default function TabLayout() {
-    const theme = useTheme();
+    const theme = useTheme(); 
 
     return (
         <>

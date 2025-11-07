@@ -18,7 +18,8 @@ import {
     useTheme,
 } from 'tamagui';
 import { LinearGradient } from 'tamagui/linear-gradient';
-
+import { logout } from '@/store/authSlice';
+import { useAppDispatch } from '@/store';
 // Locale opcional para português
 import 'dayjs/locale/pt-br';
 dayjs.locale('pt-br');
@@ -26,6 +27,7 @@ dayjs.locale('pt-br');
 export default function ProfileScreen() {
     const theme = useTheme();
     const router = useRouter();
+    const dispatch = useAppDispatch();
 
     function gerarCalendario(
         mes = dayjs().locale('pt-br').month(),
@@ -344,7 +346,8 @@ export default function ProfileScreen() {
                             opacity: 0.5,
                         }}
                         onPress={() => {
-                            router.push('/login');
+                            dispatch(logout());
+                            
                         }}
                     >
                         Logout

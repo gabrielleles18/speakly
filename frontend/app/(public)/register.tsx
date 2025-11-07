@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
+import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { ActivityIndicator, KeyboardAvoidingView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -16,6 +17,7 @@ import {
     XStack,
 } from 'tamagui';
 import { z } from 'zod';
+import { useAppSelector } from '../../store';
 
 const registerSchema = z
     .object({
@@ -32,6 +34,16 @@ const registerSchema = z
 type RegisterValues = z.infer<typeof registerSchema>;
 
 export default function Register() {
+    const router = useRouter();
+    const { isAuthenticated, loading } = useAppSelector((state) => state.auth);
+
+    // Redireciona se já estiver autenticado
+    useEffect(() => {
+        if (isAuthenticated && !loading) {
+            router.replace('/' as any);
+        }
+    }, [isAuthenticated, loading, router]);
+
     const {
         control,
         handleSubmit,

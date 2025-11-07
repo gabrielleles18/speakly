@@ -1,11 +1,13 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
+import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { KeyboardAvoidingView, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, Card, Form, Heading, Input, Label, Paragraph, Text, XStack } from 'tamagui';
 import { z } from 'zod';
-import { useRouter } from 'expo-router';
+import { useAppDispatch, useAppSelector } from '../../store';
+import { login } from '../../store/authSlice';
 
 const loginSchema = z.object({
     email: z.string().email('Invalid email address'),
@@ -16,6 +18,16 @@ type LoginValues = z.infer<typeof loginSchema>;
 
 export default function Login() {
     const router = useRouter();
+    const dispatch = useAppDispatch();
+    const { loading, error, user, isAuthenticated } = useAppSelector((state) => state.auth);
+
+    // Redireciona se já estiver autenticado
+    useEffect(() => {
+        if (isAuthenticated && !loading) {
+            router.replace('/' as any);
+        }
+    }, [isAuthenticated, loading, router]);
+
     const {
         control,
         handleSubmit,
@@ -30,7 +42,13 @@ export default function Login() {
     });
 
     const onSubmit = async (data: LoginValues) => {
-        router.push('/');
+        const response = await dispatch(login({ email: data.email, password: data.password }));
+        if (
+            response.meta.requestStatus === 'fulfilled' &&
+            (response.payload as any).isAuthenticated
+        ) {
+            router.replace('/');
+        }
     };
 
     return (
@@ -55,6 +73,7 @@ export default function Login() {
                                             value={field.value}
                                             onChangeText={field.onChange}
                                             onBlur={field.onBlur}
+                                            autoCapitalize="none"
                                         />
                                         {fieldState.error && (
                                             <Paragraph fontSize="$1" color="red">
@@ -78,6 +97,7 @@ export default function Login() {
                                             value={field.value}
                                             onChangeText={field.onChange}
                                             onBlur={field.onBlur}
+                                            autoCapitalize="none"
                                         />
                                         {fieldState.error && (
                                             <Paragraph fontSize="$1" color="red">
@@ -87,7 +107,11 @@ export default function Login() {
                                     </>
                                 )}
                             />
-
+                            {error && (
+                                <Paragraph fontSize="$1" color="red">
+                                    {error}
+                                </Paragraph>
+                            )}
                             <TouchableOpacity onPress={() => {}}>
                                 <Text
                                     fontSize="$2"
@@ -101,8 +125,12 @@ export default function Login() {
                             </TouchableOpacity>
 
                             <Form.Trigger asChild mt="$6">
-                                <Button size="$5" theme="green">
-                                    Login
+                                <Button size="$5" theme="green" disabled={loading}>
+                                    {loading ? (
+                                        <ActivityIndicator size="small" color="white" />
+                                    ) : (
+                                        'Login'
+                                    )}
                                 </Button>
                             </Form.Trigger>
 

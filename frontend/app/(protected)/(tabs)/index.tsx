@@ -9,6 +9,7 @@ export default function TabOneScreen() {
     const router = useRouter();
     const theme = useTheme();
 
+
     return (
         <SafeAreaView style={{ flex: 1 }} edges={['top']}>
             <ScrollView
