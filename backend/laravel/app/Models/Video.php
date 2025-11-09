@@ -10,4 +10,9 @@ class Video extends Model
     use HasFactory;
 
     protected $fillable = ['youtube_url', 'title', 'channel', 'thumbnail', 'duration', 'transcription', 'category_id'];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
