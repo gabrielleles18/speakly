@@ -1,5 +1,6 @@
 import { ENV } from "@/env";
 import axios from "axios";
+import EncryptedStorage from 'react-native-encrypted-storage';
 
 export const api = axios.create({
     baseURL: ENV.API_BASE_URL,
@@ -9,6 +10,30 @@ export const api = axios.create({
         Accept: "application/json",
     },
 });
+
+// Interceptor para adicionar token de autenticação em cada requisição
+api.interceptors.request.use(
+    async (config) => {
+        try {
+            const token = await EncryptedStorage.getItem('token');
+            if (token) {
+                // Remove "Bearer " se já estiver presente no token
+                const cleanToken = token.startsWith('Bearer ') ? token.substring(7) : token;
+                config.headers.Authorization = `Bearer ${cleanToken}`;
+                console.debug("api - Token adicionado à requisição:", config.url, cleanToken.substring(0, 20) + '...');
+            } else {
+                console.debug("api - Nenhum token encontrado para:", config.url);
+            }
+        } catch (error) {
+            console.error("api - Erro ao buscar token:", error);
+        }
+        return config;
+    },
+    (error) => {
+        console.error("api - Erro no interceptor de requisição:", error);
+        return Promise.reject(error);
+    },
+);
 
 // Interceptor para tratamento de erros
 api.interceptors.response.use(

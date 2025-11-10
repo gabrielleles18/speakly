@@ -1,28 +1,19 @@
+import VideosResource from '@/interfaces/videos';
 import { Clock } from '@tamagui/lucide-icons';
 import { useRouter } from 'expo-router';
 import { Image, Pressable } from 'react-native';
 import { Card, Paragraph, XStack, YStack } from 'tamagui';
 
-interface CardVideoProps {
-    title: string;
-    description: string;
-    duration: string;
-    image: string;
-    id: string;
-}
-
-export default function CardVideo({
-    title,
-    description,
-    duration,
-    image,
-    id = '1',
-}: CardVideoProps) {
+export default function CardVideo({ video }: { video: VideosResource }) {
     const router = useRouter();
+
+    const youtubeUrl = video.youtube_url;
+    const videoId = youtubeUrl.split('v=')[1];
+    const thumbnail = `https://img.youtube.com/vi/${videoId}/0.jpg`;
 
     return (
         <Pressable
-            onPress={() => router.push(`/video/${id}`)}
+            onPress={() => router.push(`/video/${video.id.toString()}`)}
             style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
         >
             <Card
@@ -37,7 +28,7 @@ export default function CardVideo({
             >
                 <Image
                     source={{
-                        uri: 'https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg',
+                        uri: thumbnail,
                     }}
                     style={{ width: 140, height: 90, borderRadius: 12 }}
                     resizeMode="cover"
@@ -51,17 +42,17 @@ export default function CardVideo({
                         numberOfLines={2}
                         lineHeight="$lineHeight"
                     >
-                        Daily English Conversation Daily English Conversation
+                        {video.title}
                     </Paragraph>
 
                     <Paragraph size="$1" color="$green8">
-                        At the Restaurant
+                        {video.channel}
                     </Paragraph>
 
                     <XStack alignItems="center" gap="$1.5" justifyContent="flex-end">
                         <Clock size="$0.75" color="$white8" />
                         <Paragraph size="$1" color="$white8">
-                            12 min
+                            {video.duration}
                         </Paragraph>
                     </XStack>
                 </YStack>

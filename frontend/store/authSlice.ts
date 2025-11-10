@@ -11,11 +11,12 @@ export const login = createAsyncThunk(
             const response = await api.post('/login', credentials);
             const { token, user, isAuthenticated } = response.data;
 
-            // salva token localmente
-            await EncryptedStorage.setItem('token', token);
-            api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            // salva token localmente (sem "Bearer " prefix)
+            const cleanToken = token.startsWith('Bearer ') ? token.substring(7) : token;
+            await EncryptedStorage.setItem('token', cleanToken);
+            api.defaults.headers.common['Authorization'] = `Bearer ${cleanToken}`;
 
-            return { user, token };
+            return { user, token: cleanToken };
         } catch (error) {
             return rejectWithValue((error as AxiosError).response?.data || 'Erro no login');
         }
@@ -42,8 +43,11 @@ export const logout = createAsyncThunk('auth/logout', async (_, { rejectWithValu
 export const loadStoredToken = createAsyncThunk('auth/loadToken', async () => {
     const token = await EncryptedStorage.getItem('token');
     if (token) {
-        api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-        return token;
+        // Remove "Bearer " se já estiver presente no token
+        const cleanToken = token.startsWith('Bearer ') ? token.substring(7) : token;
+        api.defaults.headers.common['Authorization'] = `Bearer ${cleanToken}`;
+        console.log('token carregado:', cleanToken.substring(0, 20) + '...');
+        return cleanToken;
     }
     return null;
 });

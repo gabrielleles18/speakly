@@ -1,4 +1,4 @@
-import { subtitles } from '@/util/subtitleTest';
+import { Transcription } from '@/interfaces/videos';
 import {
     ArrowLeftToLine,
     ArrowRightToLine,
@@ -14,7 +14,7 @@ import { Card, Circle, ColorTokens, Paragraph, Progress, View, XStack } from 'ta
 
 const YouTubeInitialProps = {
     autoplay: false,
-    controls: false,
+    controls: true,
     playsinline: false,
     rel: false,
     muted: false,
@@ -30,7 +30,15 @@ const YouTubeInitialProps = {
     subtitlesFontSize: 16,
 };
 
-function YoutubePlay({ videoId }: { videoId: string }) {
+function YoutubePlay({
+    videoId,
+    subtitles,
+    totalTime,
+}: {
+    videoId: string;
+    subtitles: Transcription[];
+    totalTime: string;
+}) {
     const player = useYouTubePlayer(videoId, YouTubeInitialProps);
 
     const [isPlaying, setIsPlaying] = useState(false);
@@ -174,13 +182,22 @@ function YoutubePlay({ videoId }: { videoId: string }) {
         }
     }, [currentTime, getActiveSubtitleIndex]);
 
-    console.log(currentTime);
+    const currentTimeMilliseconds = currentTime ? currentTime * 1000 : 0;
+    const totalTimeMilliseconds = parseTimeToMilliseconds(totalTime.toString());
+    const progress = (currentTimeMilliseconds / totalTimeMilliseconds) * 100;
 
     return (
         <View flex={1}>
             <YoutubeView player={player} height={240} />
 
-            <Progress size="$4" value={7} background="$green8" height={8} mb="$4" borderRadius="$0">
+            <Progress
+                size="$4"
+                value={progress}
+                background="$green8"
+                height={8}
+                mb="$4"
+                borderRadius="$0"
+            >
                 <Progress.Indicator animation="bouncy" background="$green8" borderRadius="$0" />
             </Progress>
 

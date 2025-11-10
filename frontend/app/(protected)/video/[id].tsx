@@ -1,6 +1,8 @@
 import YoutubePlay from '@/components/YoutubePlay';
+import { api } from '@/services/api';
 import { ArrowLeft, Heart } from '@tamagui/lucide-icons';
-import { useRouter } from 'expo-router';
+import { useQuery } from '@tanstack/react-query';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Heading, Paragraph, useTheme, XStack, YStack } from 'tamagui';
@@ -9,6 +11,25 @@ import { LinearGradient } from 'tamagui/linear-gradient';
 export default function VideoSingleScreen() {
     const theme = useTheme();
     const router = useRouter();
+
+    const { id } = useLocalSearchParams();
+
+    const {
+        data: video,
+        isLoading,
+        error,
+    } = useQuery({
+        queryKey: ['video', id],
+        queryFn: () => api.get(`/videos/${id}`),
+        enabled: !!id,
+    });
+
+    if (isLoading) {
+        return <Paragraph>Loading...</Paragraph>;
+    }
+
+    const youtubeUrl = video?.data?.data?.youtube_url;
+    const videoId = youtubeUrl.split('v=')[1];
 
     return (
         <SafeAreaView style={{ flex: 1 }} edges={['top']}>
@@ -31,9 +52,9 @@ export default function VideoSingleScreen() {
                             <ArrowLeft size="$1" />
                         </TouchableOpacity>
                         <YStack>
-                            <Heading size="$2">Business English - Interview Skills</Heading>
+                            <Heading size="$2">{video?.data?.data?.title}</Heading>
                             <Paragraph size="$1" color="$white3">
-                                Interview S
+                                {video?.data?.data?.channel}
                             </Paragraph>
                         </YStack>
                     </XStack>
@@ -41,7 +62,11 @@ export default function VideoSingleScreen() {
                         <Heart size="$1" />
                     </TouchableOpacity>
                 </LinearGradient>
-                <YoutubePlay videoId="_K-L9uhsBLM" />
+                <YoutubePlay
+                    videoId={videoId}
+                    subtitles={video?.data?.data?.transcription}
+                    totalTime={video?.data?.data?.duration}
+                />
             </YStack>
         </SafeAreaView>
     );

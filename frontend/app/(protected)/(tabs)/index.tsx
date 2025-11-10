@@ -1,5 +1,9 @@
 import CardVideo from '@/components/CardVideo';
+import VideosResource from '@/interfaces/videos';
+import { api } from '@/services/api';
+import { useAppSelector } from '@/store';
 import { TrendingUp, Video } from '@tamagui/lucide-icons';
+import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Card, Heading, Paragraph, ScrollView, View, XStack, YStack, useTheme } from 'tamagui';
@@ -8,7 +12,17 @@ import { LinearGradient } from 'tamagui/linear-gradient';
 export default function TabOneScreen() {
     const router = useRouter();
     const theme = useTheme();
+    const { loading, token, isAuthenticated } = useAppSelector((state) => state.auth);
 
+    const {
+        data: videos,
+        isLoading,
+        error,
+    } = useQuery({
+        queryKey: ['videos'],
+        queryFn: () => api.get('/videos'),
+        enabled: !loading && isAuthenticated && !!token,
+    });
 
     return (
         <SafeAreaView style={{ flex: 1 }} edges={['top']}>
@@ -114,8 +128,9 @@ export default function TabOneScreen() {
                         Recommended videos
                     </Heading>
                     <YStack gap="$3">
-                        <CardVideo />
-                        <CardVideo />
+                        {videos?.data?.data?.map((video: VideosResource) => {
+                            return <CardVideo key={video.id} video={video} />;
+                        })}
                     </YStack>
                 </YStack>
             </ScrollView>
