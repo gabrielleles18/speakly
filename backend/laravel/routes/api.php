@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\CategoriesController;
 use App\Http\Controllers\Api\FavoritesController;
+use App\Http\Controllers\Api\UserActivitiesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\VideosController;
@@ -23,6 +25,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/favorites', [FavoritesController::class, 'store']);
     Route::get('/favorites/{userId}/{videoId}', [FavoritesController::class, 'show']);
 
+    Route::get('/categories', [CategoriesController::class, 'index']);
 
-
+    Route::get('/userActivities/{userId}', [UserActivitiesController::class, 'show']);
 });
