@@ -3,20 +3,18 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 import EncryptedStorage from 'react-native-encrypted-storage';
 
-
 export const login = createAsyncThunk(
     'auth/login',
     async (credentials: { email: string; password: string }, { rejectWithValue }) => {
         try {
             const response = await api.post('/login', credentials);
-            const { token, user, isAuthenticated } = response.data;
+            const userData = response.data;
 
             // salva token localmente (sem "Bearer " prefix)
-            const cleanToken = token.startsWith('Bearer ') ? token.substring(7) : token;
-            await EncryptedStorage.setItem('token', cleanToken);
-            api.defaults.headers.common['Authorization'] = `Bearer ${cleanToken}`;
+            await EncryptedStorage.setItem('userData', JSON.stringify(userData));
+            api.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
 
-            return { user, token: cleanToken };
+            return userData;
         } catch (error) {
             return rejectWithValue((error as AxiosError).response?.data || 'Erro no login');
         }
@@ -25,7 +23,7 @@ export const login = createAsyncThunk(
 
 export const logout = createAsyncThunk('auth/logout', async (_, { rejectWithValue }) => {
     try {
-        const token = await EncryptedStorage.getItem('token');
+        const token = await EncryptedStorage.getItem('userData');
         if (token) {
             api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
             await api.post('/logout');
@@ -33,7 +31,7 @@ export const logout = createAsyncThunk('auth/logout', async (_, { rejectWithValu
     } catch (error) {
         console.log('Erro ao fazer logout no servidor, continuando com logout local:', error);
     } finally {
-        await EncryptedStorage.removeItem('token');
+        await EncryptedStorage.removeItem('userData');
         delete api.defaults.headers.common['Authorization'];
     }
 
@@ -41,45 +39,60 @@ export const logout = createAsyncThunk('auth/logout', async (_, { rejectWithValu
 });
 
 export const loadStoredToken = createAsyncThunk('auth/loadToken', async () => {
-    const token = await EncryptedStorage.getItem('token');
-    if (token) {
-        // Remove "Bearer " se já estiver presente no token
-        const cleanToken = token.startsWith('Bearer ') ? token.substring(7) : token;
-        api.defaults.headers.common['Authorization'] = `Bearer ${cleanToken}`;
-        console.log('token carregado:', cleanToken.substring(0, 20) + '...');
-        return cleanToken;
+    try {
+        const storedData = await EncryptedStorage.getItem('userData');
+        if (storedData) {
+            const userData = JSON.parse(storedData);
+
+            if (userData && userData.token) {
+                // Remove "Bearer " se já estiver presente no token
+                const cleanToken = userData.token.startsWith('Bearer ')
+                    ? userData.token.substring(7)
+                    : userData.token;
+
+                // Configura o token no header da API
+                api.defaults.headers.common['Authorization'] = `Bearer ${cleanToken}`;
+
+                // Retorna o userData completo com o token limpo
+                return {
+                    ...userData,
+                    token: cleanToken
+                };
+            }
+        }
+        return null;
+    } catch (error) {
+        console.error('Erro ao carregar dados do storage:', error);
+        return null;
     }
-    return null;
 });
 
 interface User {
     id: number;
     name: string;
     email: string;
+    token: string;
+    isAuthenticated: boolean;
 }
 
 interface AuthState {
-    user: User | null;
-    token: string | null;
+    userData: User | null;
     loading: boolean;
     error: string | null;
-    isAuthenticated: boolean;
 }
 
 const authSlice = createSlice({
     name: 'auth',
     initialState: {
-        user: null as User | null,
-        token: null as string | null,
-        isAuthenticated: false as boolean,
+        userData: null as User | null,
         loading: false,
         error: null as string | null,
     },
     reducers: {
-        setCredentials: (state: AuthState, action: { payload: { user: User; token: string, isAuthenticated: boolean } }) => {
-            state.user = action.payload.user;
-            state.token = action.payload.token;
-            state.isAuthenticated = !!action.payload.token;
+        setCredentials: (state: AuthState, action: { payload: { userData: User } }) => {
+            console.log(action.payload);
+            console.log('--------------------------------');
+            state.userData = action.payload.userData;
         },
     },
     extraReducers: (builder) => {
@@ -90,31 +103,26 @@ const authSlice = createSlice({
             })
             .addCase(login.fulfilled, (state, action) => {
                 state.loading = false;
-                state.user = action.payload.user;
-                state.token = action.payload.token;
-                state.isAuthenticated = !!action.payload.token;
+                state.userData = action.payload;
+
             })
             .addCase(login.rejected, (state, action) => {
                 state.loading = false;
                 state.error = (action.payload as any).message as string | null;
             })
             .addCase(logout.fulfilled, (state) => {
-                state.user = null;
-                state.token = null;
-                state.isAuthenticated = false;
+                state.userData = null;
             })
             .addCase(loadStoredToken.pending, (state) => {
                 state.loading = true;
             })
             .addCase(loadStoredToken.fulfilled, (state, action) => {
                 state.loading = false;
-                state.token = action.payload;
-                state.isAuthenticated = !!action.payload;
+                state.userData = action.payload || null;
             })
             .addCase(loadStoredToken.rejected, (state) => {
                 state.loading = false;
-                state.token = null;
-                state.isAuthenticated = false;
+                state.userData = null;
             });
     },
 });

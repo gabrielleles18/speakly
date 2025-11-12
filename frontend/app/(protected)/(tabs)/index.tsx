@@ -12,7 +12,7 @@ import { LinearGradient } from 'tamagui/linear-gradient';
 export default function TabOneScreen() {
     const router = useRouter();
     const theme = useTheme();
-    const { loading, token, isAuthenticated } = useAppSelector((state) => state.auth);
+    const { loading, userData } = useAppSelector((state) => state.auth);
 
     const {
         data: videos,
@@ -21,7 +21,7 @@ export default function TabOneScreen() {
     } = useQuery({
         queryKey: ['videos'],
         queryFn: () => api.get('/videos'),
-        enabled: !loading && isAuthenticated && !!token,
+        enabled: !loading,
     });
 
     return (

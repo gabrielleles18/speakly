@@ -15,7 +15,8 @@ export const api = axios.create({
 api.interceptors.request.use(
     async (config) => {
         try {
-            const token = await EncryptedStorage.getItem('token');
+            const userData = await EncryptedStorage.getItem('userData');
+            const token = JSON.parse(userData || '{}').token;
             if (token) {
                 // Remove "Bearer " se já estiver presente no token
                 const cleanToken = token.startsWith('Bearer ') ? token.substring(7) : token;

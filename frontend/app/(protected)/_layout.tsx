@@ -4,17 +4,21 @@ import { useAppSelector } from '../../store';
 
 export default function ProtectedLayout() {
     const router = useRouter();
-    const { isAuthenticated, loading } = useAppSelector((state) => state.auth);
+    const { userData, loading } = useAppSelector((state) => state.auth);
+
+    console.log({ userData });
+    console.log({ loading });
+    console.log('--------------------------------');
 
     useEffect(() => {
         // Aguarda o carregamento do token antes de verificar
         if (loading) return;
 
         // Se não estiver autenticado, redireciona para login
-        if (!isAuthenticated) {
+        if (!userData?.isAuthenticated) {
             router.replace('/login' as any);
         }
-    }, [isAuthenticated, loading, router]);
+    }, [userData, loading, router]);
 
     return (
         <Stack screenOptions={{ headerShown: false }}>

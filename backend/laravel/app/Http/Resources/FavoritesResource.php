@@ -19,7 +19,7 @@ class FavoritesResource extends JsonResource
                 'id'=> $this->video->id,
                 'title'=> $this->video->title,
                 'channel'=> $this->video->channel,
-                'youtubeUrl'=> $this->video->youtube_url,
+                'youtube_url'=> $this->video->youtube_url,
                 'duration'=> $this->video->duration,
             ],
             'user' => [

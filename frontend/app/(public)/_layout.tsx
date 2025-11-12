@@ -4,17 +4,17 @@ import { useAppSelector } from '../../store';
 
 export default function AuthLayout() {
     const router = useRouter();
-    const { isAuthenticated, loading } = useAppSelector((state) => state.auth);
+    const { userData, loading } = useAppSelector((state) => state.auth);
 
     useEffect(() => {
         // Aguarda o carregamento do token antes de verificar
         if (loading) return;
 
         // Se o usuário está autenticado, redireciona para as rotas protegidas
-        if (isAuthenticated) {
+        if (userData?.isAuthenticated) {
             router.replace('/' as any);
         }
-    }, [isAuthenticated, loading, router]);
+    }, [userData, loading, router]);
 
     return (
         <Stack>

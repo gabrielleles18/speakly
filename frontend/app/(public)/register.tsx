@@ -35,14 +35,14 @@ type RegisterValues = z.infer<typeof registerSchema>;
 
 export default function Register() {
     const router = useRouter();
-    const { isAuthenticated, loading } = useAppSelector((state) => state.auth);
+    const { userData, loading } = useAppSelector((state) => state.auth);
 
     // Redireciona se já estiver autenticado
     useEffect(() => {
-        if (isAuthenticated && !loading) {
+        if (userData?.isAuthenticated && !loading) {
             router.replace('/' as any);
         }
-    }, [isAuthenticated, loading, router]);
+    }, [userData, loading, router]);
 
     const {
         control,

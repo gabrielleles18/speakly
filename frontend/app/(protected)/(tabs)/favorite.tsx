@@ -1,4 +1,7 @@
 import CardVideo from '@/components/CardVideo';
+import { api } from '@/services/api';
+import { useAppSelector } from '@/store';
+import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Heading, Paragraph, ScrollView, useTheme, YStack } from 'tamagui';
@@ -7,6 +10,21 @@ import { LinearGradient } from 'tamagui/linear-gradient';
 export default function FavoriteScreen() {
     const theme = useTheme();
     const router = useRouter();
+    const { userData } = useAppSelector((state) => state.auth);
+
+    const {
+        data: favorites,
+        isLoading,
+        error,
+    } = useQuery({
+        queryKey: ['favorites'],
+        queryFn: () => api.get('/favorites/' + userData?.id),
+        enabled: !!userData?.id,
+    });
+
+    if (isLoading) {
+        return <Paragraph>Loading...</Paragraph>;
+    }
 
     return (
         <SafeAreaView style={{ flex: 1 }} edges={['top']}>
@@ -31,8 +49,9 @@ export default function FavoriteScreen() {
                     </LinearGradient>
                     <ScrollView showsVerticalScrollIndicator={false} backgroundColor="$background">
                         <YStack gap="$3" m="$4">
-                            <CardVideo />
-                            <CardVideo />
+                            {favorites?.data?.data?.map((favorite: any, index: number) => {
+                                return <CardVideo key={index} video={favorite.video} />;
+                            })}
                         </YStack>
                     </ScrollView>
                 </YStack>

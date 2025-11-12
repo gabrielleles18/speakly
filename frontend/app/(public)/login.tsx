@@ -19,14 +19,15 @@ type LoginValues = z.infer<typeof loginSchema>;
 export default function Login() {
     const router = useRouter();
     const dispatch = useAppDispatch();
-    const { loading, error, user, isAuthenticated } = useAppSelector((state) => state.auth);
+    const { loading, error, userData } = useAppSelector((state) => state.auth);
+    
 
     // Redireciona se já estiver autenticado
     useEffect(() => {
-        if (isAuthenticated && !loading) {
+        if (userData?.isAuthenticated && !loading) {
             router.replace('/' as any);
         }
-    }, [isAuthenticated, loading, router]);
+    }, [userData, loading, router]);
 
     const {
         control,
