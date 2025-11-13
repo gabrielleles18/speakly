@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Category;
 use App\Models\Video;
 use App\Models\Sentence;
-use App\Models\SpacedRepetition;
 use App\Models\UserActivity;
 use App\Models\Favorite;
 
@@ -61,17 +60,15 @@ class DatabaseSeeder extends Seeder
             'sentence' => fake()->sentence(),
             'translation' => fake()->sentence(),
             'time_video_start' => fake()->time(),
+            'next_review_date' => fake()->dateTime(),
+            'last_review_date' => fake()->dateTime(),
+            'quality' => fake()->numberBetween(0, 10),
+            'ease_factor' => fake()->randomFloat(2, 1.30, 2.50),
+            'interval' => fake()->numberBetween(0, 365),
+            'repetitions' => fake()->numberBetween(0, 100),
+            'enabled' => fake()->boolean(),
             'video_id' => Video::inRandomOrder()->first()->id,
             'user_id' => User::inRandomOrder()->first()->id ?? User::factory()->create()->id,
-        ]);
-
-        // Spaced Repetitions
-        SpacedRepetition::factory(5)->create([
-            'sentence_id' => Sentence::inRandomOrder()->first()->id,
-            'user_id' => User::inRandomOrder()->first()->id ?? User::factory()->create()->id,
-            'next_review_date' => fake()->dateTime(),
-            'quality' => fake()->numberBetween(0, 10),
-            'enabled' => fake()->boolean(),
         ]);
 
         // User Activities

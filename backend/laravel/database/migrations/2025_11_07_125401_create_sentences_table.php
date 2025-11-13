@@ -18,6 +18,13 @@ return new class extends Migration
             $table->time('time_video_start');
             $table->foreignId('video_id')->constrained('videos');
             $table->foreignId('user_id')->constrained('users');
+            $table->dateTime('next_review_date');
+            $table->dateTime('last_review_date')->nullable();
+            $table->integer('quality')->default(0);
+            $table->decimal('ease_factor', 5, 2)->default(2.50);
+            $table->integer('interval')->default(0);
+            $table->integer('repetitions')->default(0);
+            $table->boolean('enabled')->default(true);
             $table->timestamps();
         });
     }

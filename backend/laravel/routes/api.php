@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Api\CategoriesController;
 use App\Http\Controllers\Api\FavoritesController;
-use App\Http\Controllers\Api\UserActivitiesController;
+use App\Http\Controllers\Api\SentencesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\VideosController;
@@ -27,5 +27,14 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/categories', [CategoriesController::class, 'index']);
 
-    Route::get('/userActivities/{userId}', [UserActivitiesController::class, 'show']);
+    Route::get('/sentences/{userId}', [SentencesController::class, 'show']);
+    Route::post('/sentences', [SentencesController::class, 'store']);
+    Route::put('/sentences/{id}', [SentencesController::class, 'update']);
+    Route::delete('/sentences/{id}', [SentencesController::class, 'destroy']);
+
+    # Sentenças em revisão
+    //GET /api/sentences/{userId}?filter=review
+
+    # Sentenças dominadas
+    //GET /api/sentences/{userId}?filter=dominated
 });
