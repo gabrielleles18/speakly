@@ -71,12 +71,16 @@ interface User {
     id: number;
     name: string;
     email: string;
+}
+
+interface UserData {
+    user: User;
     token: string;
     isAuthenticated: boolean;
 }
 
 interface AuthState {
-    userData: User | null;
+    userData: UserData | null;
     loading: boolean;
     error: string | null;
 }
@@ -84,12 +88,12 @@ interface AuthState {
 const authSlice = createSlice({
     name: 'auth',
     initialState: {
-        userData: null as User | null,
+        userData: null as UserData | null,
         loading: false,
         error: null as string | null,
     },
     reducers: {
-        setCredentials: (state: AuthState, action: { payload: { userData: User } }) => {
+        setCredentials: (state: AuthState, action: { payload: { userData: UserData } }) => {
             console.log(action.payload);
             console.log('--------------------------------');
             state.userData = action.payload.userData;

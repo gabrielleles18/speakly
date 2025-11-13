@@ -18,8 +18,8 @@ export default function FavoriteScreen() {
         error,
     } = useQuery({
         queryKey: ['favorites'],
-        queryFn: () => api.get('/favorites/' + userData?.id),
-        enabled: !!userData?.id,
+        queryFn: () => api.get('/favorites/' + userData?.user.id),
+        enabled: !!userData?.user.id,
     });
 
     if (isLoading) {
