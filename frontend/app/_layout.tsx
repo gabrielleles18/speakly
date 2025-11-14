@@ -15,6 +15,7 @@ import { store, useAppDispatch, useAppSelector } from '../store';
 import { loadStoredToken } from '../store/authSlice';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { QueryClient } from '@tanstack/react-query';
+import { PortalProvider } from '@tamagui/portal';
 
 export { ErrorBoundary } from 'expo-router';
 
@@ -71,13 +72,15 @@ function RootLayoutNav() {
             <AuthInitializer>
                 <QueryClientProvider client={queryClient}>
                     <TamaguiProvider config={tamaguiConfig} defaultTheme={colorScheme!}>
-                        <StatusBar backgroundColor="#3b34d5" />
-                        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-                            <Stack>
-                                <Stack.Screen name="(protected)" options={{ headerShown: false }} />
-                                <Stack.Screen name="(public)" options={{ headerShown: false }} />
-                            </Stack>
-                        </ThemeProvider>
+                        <PortalProvider shouldAddRootHost>
+                            <StatusBar backgroundColor="#3b34d5" />
+                            <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+                                <Stack>
+                                    <Stack.Screen name="(protected)" options={{ headerShown: false }} />
+                                    <Stack.Screen name="(public)" options={{ headerShown: false }} />
+                                </Stack>
+                            </ThemeProvider>
+                        </PortalProvider>
                     </TamaguiProvider>
                 </QueryClientProvider>
             </AuthInitializer>

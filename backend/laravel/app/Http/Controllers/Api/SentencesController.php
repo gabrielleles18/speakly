@@ -21,7 +21,7 @@ class SentencesController extends Controller
 
         // Aplicar filtros
         switch ($filter) {
-            case 'review':
+            case 'toReview':
                 // Sentenças que precisam de revisão (next_review_date <= hoje)
                 $query->where('next_review_date', '<=', Carbon::now())
                     ->orderBy('next_review_date', 'asc');
