@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\SentencesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\VideosController;
+use App\Http\Controllers\Api\UserActivitiesController;
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
@@ -31,6 +32,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/sentences', [SentencesController::class, 'store']);
     Route::put('/sentences/{id}', [SentencesController::class, 'update']);
     Route::delete('/sentences/{id}', [SentencesController::class, 'destroy']);
+
+    Route::get('/user-activities/watched-videos/{userId}', [UserActivitiesController::class, 'watchedVideos']);
+    Route::get('/user-activities/days-practiced/{userId}', [UserActivitiesController::class, 'daysPracticed']);
+    Route::get('/user-activities/total-days-practiced/{userId}', [UserActivitiesController::class, 'totalDaysPracticed']);
+    Route::get('/user-activities/total-sentences-practiced/{userId}', [UserActivitiesController::class, 'totalSentencesPracticed']);
 
     # Sentenças em revisão
     //GET /api/sentences/{userId}?filter=review

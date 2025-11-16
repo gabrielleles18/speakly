@@ -1,4 +1,8 @@
+import { api } from '@/services/api';
+import { useAppDispatch, useAppSelector } from '@/store';
+import { logout } from '@/store/authSlice';
 import { HelpCircle, Pencil } from '@tamagui/lucide-icons';
+import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import { useRouter } from 'expo-router';
 import { Linking } from 'react-native';
@@ -18,16 +22,55 @@ import {
     useTheme,
 } from 'tamagui';
 import { LinearGradient } from 'tamagui/linear-gradient';
-import { logout } from '@/store/authSlice';
-import { useAppDispatch } from '@/store';
 // Locale opcional para português
 import 'dayjs/locale/pt-br';
 dayjs.locale('pt-br');
+
+// Função para extrair as iniciais do nome
+function getInitials(name: string | undefined): string {
+    if (!name) return '';
+
+    const words = name
+        .trim()
+        .split(/\s+/)
+        .filter((word) => word.length > 0);
+
+    if (words.length === 0) return '';
+    if (words.length === 1) return words[0].charAt(0).toUpperCase();
+
+    // Retorna primeira letra do primeiro nome e primeira letra do último sobrenome
+    return (words[0].charAt(0) + words[words.length - 1].charAt(0)).toUpperCase();
+}
 
 export default function ProfileScreen() {
     const theme = useTheme();
     const router = useRouter();
     const dispatch = useAppDispatch();
+    const { loading, userData } = useAppSelector((state) => state.auth);
+
+    const { data: daysPracticedConsecutive } = useQuery({
+        queryKey: ['daysPracticed'],
+        queryFn: () => api.get(`/user-activities/days-practiced/${userData?.user.id}`),
+        enabled: !loading && userData?.user !== undefined,
+    });
+
+    const { data: totalSentencesPracticed } = useQuery({
+        queryKey: ['totalSentencesPracticed'],
+        queryFn: () => api.get(`/user-activities/total-sentences-practiced/${userData?.user.id}`),
+        enabled: !loading && userData?.user !== undefined,
+    });
+
+    const { data: totalVideosWatched } = useQuery({
+        queryKey: ['totalVideosWatched'],
+        queryFn: () => api.get(`/user-activities/watched-videos/${userData?.user.id}`),
+        enabled: !loading && userData?.user !== undefined,
+    });
+
+    const { data: totalDaysPracticed } = useQuery({
+        queryKey: ['totalDaysPracticed'],
+        queryFn: () => api.get(`/user-activities/total-days-practiced/${userData?.user.id}`),
+        enabled: !loading && userData?.user !== undefined,
+    });
 
     function gerarCalendario(
         mes = dayjs().locale('pt-br').month(),
@@ -57,6 +100,40 @@ export default function ProfileScreen() {
     }
 
     const calendario = gerarCalendario();
+
+    const getLevel = (sentences: number) => {
+        if (sentences <= 0) {
+            return 'Beginner';
+        } else if (sentences < 100) {
+            return 'Beginner +';
+        } else if (sentences < 200) {
+            return 'Beginner ++';
+        } else if (sentences < 500) {
+            return 'Intermediate';
+        } else if (sentences < 1000) {
+            return 'Intermediate +';
+        } else if (sentences < 1500) {
+            return 'Intermediate ++';
+        } else if (sentences < 2000) {
+            return 'Advanced';
+        } else if (sentences < 2500) {
+            return 'Advanced +';
+        } else if (sentences < 3000) {
+            return 'Advanced ++';
+        } else if (sentences < 3500) {
+            return 'Expert';
+        } else if (sentences < 4000) {
+            return 'Expert +';
+        } else if (sentences < 5000) {
+            return 'Expert ++';
+        } else {
+            return 'Master';
+        }
+    };
+
+    const getLevelProgressPercentage = (sentences: number) => {
+        return Math.round(Math.min(Math.max((sentences / 5000) * 100, 0), 100));
+    };
 
     return (
         <SafeAreaView style={{ flex: 1 }} edges={['top']}>
@@ -91,7 +168,6 @@ export default function ProfileScreen() {
                             p="$3"
                             borderRadius="$4"
                             backgroundColor="rgba(255, 255, 255, 0.06)"
-                            gap="$4"
                             flex={1}
                             borderWidth={1}
                             borderColor="rgba(255, 255, 255, 0.09)"
@@ -101,20 +177,18 @@ export default function ProfileScreen() {
                                 <Avatar
                                     circular
                                     size="$8"
-                                    borderWidth={1}
+                                    borderWidth={0.5}
                                     borderColor="$white3"
                                     borderBottomRightRadius="$10"
                                 >
-                                    <Avatar.Image
-                                        accessibilityLabel="Cam"
-                                        src="https://images.unsplash.com/photo-1548142813-c348350df52b?&w=150&h=150&dpr=2&q=80"
-                                    />
-                                    <Avatar.Fallback backgroundColor="$blue10" />
+                                    <Paragraph size="$8" color="$white3" fontWeight="bold">
+                                        {getInitials(userData?.user.name)}
+                                    </Paragraph>
                                 </Avatar>
 
                                 <YStack flex={1} alignItems="flex-start" gap="$1">
                                     <Heading size="$3" color="$white3">
-                                        John Doe
+                                        {userData?.user.name}
                                     </Heading>
                                     <Paragraph
                                         size="$2"
@@ -124,32 +198,42 @@ export default function ProfileScreen() {
                                         p="$1"
                                         px="$3"
                                     >
-                                        Intermediate Level
+                                        Level: {getLevel(totalSentencesPracticed?.data || 0)}
                                     </Paragraph>
 
                                     <XStack gap="$2.5">
                                         <Paragraph size="$2" color="$white3" mt="$1.5">
-                                            🔥 12 days active
+                                            🔥 {daysPracticedConsecutive?.data || 0} days active
+                                            consecutive
                                         </Paragraph>
                                     </XStack>
                                 </YStack>
                             </XStack>
 
-                            <XStack
-                                gap="$2.5"
-                                alignItems="center"
-                                justifyContent="space-between"
-                                flex={1}
-                            >
-                                <Paragraph>Weekly Goal</Paragraph>
-                                <Paragraph size="$2" color="$white3">
-                                    65%
-                                </Paragraph>
-                            </XStack>
-
-                            <Progress size="$4" value={7} background="$green8" height={8}>
-                                <Progress.Indicator animation="bouncy" background="$green8" />
-                            </Progress>
+                            <Paragraph size="$4" color="$white3" mt="$4" mb="$1">
+                                Level Progress:{' '}
+                                {getLevelProgressPercentage(totalSentencesPracticed?.data || 0)}%
+                            </Paragraph>
+                            <YStack gap="$1">
+                                <XStack justifyContent="space-between">
+                                    <Paragraph size="$2" color="$white3">
+                                        {getLevel(totalSentencesPracticed?.data || 0)}
+                                    </Paragraph>
+                                    <Paragraph size="$2" color="$white3">
+                                        Master
+                                    </Paragraph>
+                                </XStack>
+                                <Progress
+                                    size="$4"
+                                    value={getLevelProgressPercentage(
+                                        totalSentencesPracticed?.data || 0
+                                    )}
+                                    background="$green8"
+                                    height={8}
+                                >
+                                    <Progress.Indicator animation="bouncy" background="$green8" />
+                                </Progress>
+                            </YStack>
                         </Card>
                     </XStack>
                 </LinearGradient>
@@ -171,7 +255,7 @@ export default function ProfileScreen() {
                         minHeight={120}
                     >
                         <Heading size="$2" p="$0" mb="$4" color="$yellow9">
-                            234
+                            {totalSentencesPracticed?.data || 0}
                         </Heading>
                         <Paragraph size="$2" color="$white3">
                             Learned Phrases
@@ -193,7 +277,7 @@ export default function ProfileScreen() {
                         minHeight={120}
                     >
                         <Heading size="$2" p="$0" mb="$4" color="$blue9">
-                            48
+                            {totalVideosWatched?.data || 0}
                         </Heading>
                         <Paragraph size="$2" color="$white3">
                             Videos Watched
@@ -215,7 +299,7 @@ export default function ProfileScreen() {
                         minHeight={120}
                     >
                         <Heading size="$2" p="$0" mb="$4" color="$green9">
-                            48
+                            {totalDaysPracticed?.data || 0}
                         </Heading>
                         <Paragraph size="$2" color="$white3">
                             Study Days
@@ -347,7 +431,6 @@ export default function ProfileScreen() {
                         }}
                         onPress={() => {
                             dispatch(logout());
-                            
                         }}
                     >
                         Logout

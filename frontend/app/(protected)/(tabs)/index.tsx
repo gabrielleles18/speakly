@@ -24,6 +24,26 @@ export default function TabOneScreen() {
         enabled: !loading,
     });
 
+    const {
+        data: watchedVideos,
+        isLoading: watchedVideosLoading,
+        error: watchedVideosError,
+    } = useQuery({
+        queryKey: ['watchedVideos'],
+        queryFn: () => api.get(`/user-activities/watched-videos/${userData?.user.id}`),
+        enabled: !loading && userData?.user !== undefined,
+    });
+
+    const {
+        data: daysPracticedConsecutive,
+        isLoading: daysPracticedLoading,
+        error: daysPracticedError,
+    } = useQuery({
+        queryKey: ['daysPracticed'],
+        queryFn: () => api.get(`/user-activities/days-practiced/${userData?.user.id}`),
+        enabled: !loading && userData?.user !== undefined,
+    });
+
     return (
         <SafeAreaView style={{ flex: 1 }} edges={['top']}>
             <ScrollView
@@ -89,7 +109,7 @@ export default function TabOneScreen() {
                                         Your progress
                                     </Paragraph>
                                     <Paragraph size="$1" color="$white3">
-                                        12 days
+                                        {daysPracticedConsecutive?.data} days consecutive
                                     </Paragraph>
                                 </View>
                             </Card>
@@ -115,7 +135,7 @@ export default function TabOneScreen() {
                                         Assisted
                                     </Paragraph>
                                     <Paragraph size="$1" color="$white3">
-                                        4 videos
+                                        {watchedVideos?.data} videos
                                     </Paragraph>
                                 </View>
                             </Card>

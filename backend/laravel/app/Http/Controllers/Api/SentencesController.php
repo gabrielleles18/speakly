@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Sentence;
+use App\Models\UserActivity;
 use App\Http\Resources\SentencesResource;
 use Carbon\Carbon;
 
@@ -13,7 +14,7 @@ class SentencesController extends Controller
     public function show(Request $request, $userId)
     {
         $filter = $request->query('filter', 'all'); // 'all', 'review', 'dominated'
-        
+
         $query = Sentence::where('user_id', $userId)
             ->where('enabled', true);
 
@@ -26,7 +27,7 @@ class SentencesController extends Controller
                 $query->where('next_review_date', '<=', Carbon::now())
                     ->orderBy('next_review_date', 'asc');
                 break;
-            
+
             case 'dominated':
                 // Sentenças dominadas (repetitions >= 5 e interval >= 30 dias)
                 $query->where('repetitions', '>=', 5)
@@ -34,7 +35,7 @@ class SentencesController extends Controller
                     ->orderBy('repetitions', 'desc')
                     ->orderBy('interval', 'desc');
                 break;
-            
+
             case 'all':
             default:
                 // Todas as sentenças, ordenadas pelas mais recentes
@@ -43,7 +44,7 @@ class SentencesController extends Controller
         }
 
         $sentences = $query->limit(20)->get();
-        
+
         return [
             'sentences' => SentencesResource::collection($sentences),
             'total_all' => $total_all->count(),
@@ -112,13 +113,10 @@ class SentencesController extends Controller
             ->where('user_id', $request->user()->id)
             ->firstOrFail();
 
-        if (!$sentence) {
-            return response()->json(['message' => 'Sentence not found'], 404);
-        }
+        // Deleta os registros relacionados em user_activities antes de deletar a sentença
+        UserActivity::where('sentence_id', $sentence->id)->delete();
 
-        if (!$sentence->delete()) {
-            return response()->json(['message' => 'Failed to delete sentence'], 500);
-        }
+        $sentence->delete();
 
         return response()->json(['message' => 'Sentence deleted successfully'], 200);
     }

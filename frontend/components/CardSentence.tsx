@@ -1,4 +1,6 @@
+import { api } from '@/services/api';
 import { Trash } from '@tamagui/lucide-icons';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import { TouchableOpacity } from 'react-native';
 import { Card, Heading, Paragraph, XStack } from 'tamagui';
@@ -7,15 +9,37 @@ interface CardSentenceProps {
     sentence: string;
     translation: string;
     reviewDate: string;
+    sentenceId: number;
 }
 
-export default function CardSentence({ sentence, translation, reviewDate }: CardSentenceProps) {
+export default function CardSentence({
+    sentence,
+    translation,
+    reviewDate,
+    sentenceId,
+}: CardSentenceProps) {
+    const queryClient = useQueryClient();
+
+    const deleteMutation = useMutation({
+        mutationFn: async (id: number) => {
+            const response = await api.delete('/sentences/' + id);
+            return response.data;
+        },
+        onSuccess: () => {
+            // Invalida todas as queries de sentences para atualizar a lista
+            queryClient.invalidateQueries({ queryKey: ['sentences'] });
+        },
+        onError: (error) => {
+            console.error('Erro ao deletar sentença:', error);
+        },
+    });
+
     const onPress = () => {
         console.log('onPress');
     };
 
     const onDelete = () => {
-        console.log('onDelete');
+        deleteMutation.mutate(sentenceId);
     };
 
     const getReviewText = () => {
@@ -72,7 +96,11 @@ export default function CardSentence({ sentence, translation, reviewDate }: Card
                     <Paragraph size="$2" color="$white11">
                         {getReviewText()}
                     </Paragraph>
-                    <TouchableOpacity onPress={onDelete} style={{ padding: 2 }}>
+                    <TouchableOpacity
+                        onPress={onDelete}
+                        disabled={deleteMutation.isPending}
+                        style={{ padding: 2, opacity: deleteMutation.isPending ? 0.5 : 1 }}
+                    >
                         <Trash size="$1" color="$red10" />
                     </TouchableOpacity>
                 </XStack>

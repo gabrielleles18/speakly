@@ -1,6 +1,9 @@
 import CardSentence from '@/components/CardSentence';
+import SentencesResource from '@/interfaces/sentence';
 import { api } from '@/services/api';
+import { useAppSelector } from '@/store';
 import { BookOpen } from '@tamagui/lucide-icons';
+import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -17,8 +20,6 @@ import {
     YStack,
 } from 'tamagui';
 import { LinearGradient } from 'tamagui/linear-gradient';
-import { useQuery } from '@tanstack/react-query';
-import { useAppSelector } from '@/store';
 
 export default function PracticeScreen() {
     const theme = useTheme();
@@ -38,10 +39,7 @@ export default function PracticeScreen() {
 
     return (
         <>
-            
             <SafeAreaView style={{ flex: 1 }} edges={['top']}>
-
-
                 <ScrollView showsVerticalScrollIndicator={false} backgroundColor="$background">
                     <YStack flex={1} background="$background">
                         <LinearGradient
@@ -133,7 +131,10 @@ export default function PracticeScreen() {
                                 </Card>
                             </XStack>
                         </LinearGradient>
-                        <ScrollView showsVerticalScrollIndicator={false} backgroundColor="$background">
+                        <ScrollView
+                            showsVerticalScrollIndicator={false}
+                            backgroundColor="$background"
+                        >
                             <LinearGradient
                                 colors={[theme.red6.val, theme.blue4.val]}
                                 locations={[0.1, 0.9]}
@@ -226,15 +227,21 @@ export default function PracticeScreen() {
                             </Group>
 
                             <YStack gap="$3" m="$4">
-                                {sentences?.data.sentences.map((sentence) => (
+                                {sentences?.data.sentences.map((sentence: SentencesResource) => (
                                     <CardSentence
                                         key={sentence.id}
                                         sentence={sentence.sentence}
                                         translation={sentence.translation}
                                         reviewDate={sentence.next_review_date}
+                                        sentenceId={sentence.id}
                                     />
                                 ))}
-                                
+
+                                {sentences?.data.sentences.length === 0 && (
+                                    <Paragraph size="$2" color="$white3">
+                                        No sentences found
+                                    </Paragraph>
+                                )}
                             </YStack>
                         </ScrollView>
                     </YStack>
