@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { ArrowLeft } from '@tamagui/lucide-icons';
 import { useRouter } from 'expo-router';
 import { Controller, useForm } from 'react-hook-form';
-import { ActivityIndicator, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, Alert, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {
     Button,
@@ -23,8 +23,8 @@ import { useAppDispatch } from '@/store';
 import { updateProfile } from '@/store/authSlice';
 const profileEditSchema = z.object({
     name: z.string().min(1),
-    currentPassword: z.string().min(1),
-    newPassword: z.string().min(1),
+    currentPassword: z.string().min(0).nullable(),
+    newPassword: z.string().min(0).nullable(),
 });
 
 type ProfileEditValues = z.infer<typeof profileEditSchema>;
@@ -49,9 +49,16 @@ export default function ProfileEditScreen() {
     });
 
     const onSubmit = async (data: ProfileEditValues) => {
-        const response = await dispatch(updateProfile(data));
-        if (response.meta.requestStatus === 'fulfilled') {
-            router.back();
+        const response = await dispatch(updateProfile({
+            name: data.name,
+            currentPassword: data.currentPassword || '',
+            newPassword: data.newPassword || '',
+        }));
+        console.log({response});
+        if (response.payload.message && response.payload.message.length > 0) {
+            Alert.alert('Error', response.payload.message as string);
+        } else {
+            Alert.alert('Success', 'Profile updated successfully');
         }
     };
 
@@ -118,8 +125,8 @@ export default function ProfileEditScreen() {
                                     id="currentPassword"
                                     placeholder="****"
                                     secureTextEntry
-                                    value={field.value}
-                                    onChangeText={field.onChange}
+                                    value={field.value || ''}
+                                    onChangeText={(text) => field.onChange(text || null)}
                                     onBlur={field.onBlur}
                                 />
                                 {fieldState.error && (
@@ -141,8 +148,8 @@ export default function ProfileEditScreen() {
                                     id="newPassword"
                                     placeholder="****"
                                     secureTextEntry
-                                    value={field.value}
-                                    onChangeText={field.onChange}
+                                    value={field.value || ''}
+                                    onChangeText={(text) => field.onChange(text || null)}
                                     onBlur={field.onBlur}
                                 />
                                 {fieldState.error && (
@@ -155,7 +162,7 @@ export default function ProfileEditScreen() {
                     />
 
                     <Form.Trigger asChild mt="$6">
-                        <Button size="$5" theme="green" disabled={isLoading}>
+                        <Button size="$5" backgroundColor="$green8" disabled={isLoading}>
                             {isLoading ? (
                                 <ActivityIndicator size="small" color="white" />
                             ) : (

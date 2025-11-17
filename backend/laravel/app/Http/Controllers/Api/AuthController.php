@@ -81,11 +81,11 @@ class AuthController extends Controller
 
         $validated = $request->validate([
             'name' => 'required|string|max:100',
-            'currentPassword' => 'required|string|min:6',
-            'newPassword' => 'required|string|min:6|different:currentPassword',
+            'currentPassword' => 'string|min:6|nullable',
+            'newPassword' => 'string|min:6|different:currentPassword|nullable',
         ]);
 
-        if (! Hash::check($validated['currentPassword'], $user->password)) {
+        if (!empty($validated['currentPassword']) && !empty($validated['newPassword']) && ! Hash::check($validated['currentPassword'], $user->password)) {
             return response()->json([
                 'message' => 'Invalid current password'
             ], 401);
@@ -93,7 +93,7 @@ class AuthController extends Controller
 
         $user->update([
             'name' => $validated['name'],
-            'password' => Hash::make($validated['newPassword']),
+            'password' => !empty($validated['newPassword']) ? Hash::make($validated['newPassword']) : $user->password,
         ]);
         $token = $user->createToken('auth_token')->plainTextToken;
 

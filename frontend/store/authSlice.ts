@@ -109,8 +109,6 @@ const authSlice = createSlice({
     },
     reducers: {
         setCredentials: (state: AuthState, action: { payload: { userData: UserData } }) => {
-            console.log(action.payload);
-            console.log('--------------------------------');
             state.userData = action.payload.userData;
         },
     },
@@ -142,7 +140,19 @@ const authSlice = createSlice({
             .addCase(loadStoredToken.rejected, (state) => {
                 state.loading = false;
                 state.userData = null;
-            });
+            })
+            .addCase(updateProfile.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(updateProfile.fulfilled, (state, action) => {
+                state.loading = false;
+                state.userData = action.payload;
+            })
+            .addCase(updateProfile.rejected, (state, action) => {
+                state.loading = false;
+                state.error = (action.payload as any).message as string | null;
+            })
     },
 });
 
