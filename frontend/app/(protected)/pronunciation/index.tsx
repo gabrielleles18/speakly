@@ -7,6 +7,7 @@ import {
     Button,
     Card,
     Circle,
+    Group,
     Heading,
     Paragraph,
     Progress,
@@ -152,7 +153,25 @@ export default function PronunciationScreen() {
                         </Button>
                     </Card>
                 )}
+
+                
             </ScrollView>
+            <YStack position="absolute" bottom="$0" left="$0" right="$0">
+                    <Group orientation="horizontal" flex={1} mb="$6">
+                        <Group.Item>
+                            <Button flex={1}>Again</Button>
+                        </Group.Item>
+                        <Group.Item>
+                            <Button flex={1}>Hard</Button>
+                        </Group.Item>
+                        <Group.Item>
+                            <Button flex={1}>Good</Button>
+                        </Group.Item>
+                        <Group.Item>
+                            <Button flex={1}>Easy</Button>
+                        </Group.Item>
+                    </Group>
+                </YStack>
         </SafeAreaView>
     );
 }
