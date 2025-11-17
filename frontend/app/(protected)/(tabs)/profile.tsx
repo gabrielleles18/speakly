@@ -22,25 +22,12 @@ import {
     useTheme,
 } from 'tamagui';
 import { LinearGradient } from 'tamagui/linear-gradient';
+import gerarCalendario from '@/util/gerarCalendario';
+import getLevel from '@/util/getLevel';
+import getInitialsLetters from '@/util/getInitialsLetters';
 // Locale opcional para português
 import 'dayjs/locale/pt-br';
 dayjs.locale('pt-br');
-
-// Função para extrair as iniciais do nome
-function getInitials(name: string | undefined): string {
-    if (!name) return '';
-
-    const words = name
-        .trim()
-        .split(/\s+/)
-        .filter((word) => word.length > 0);
-
-    if (words.length === 0) return '';
-    if (words.length === 1) return words[0].charAt(0).toUpperCase();
-
-    // Retorna primeira letra do primeiro nome e primeira letra do último sobrenome
-    return (words[0].charAt(0) + words[words.length - 1].charAt(0)).toUpperCase();
-}
 
 export default function ProfileScreen() {
     const theme = useTheme();
@@ -72,69 +59,18 @@ export default function ProfileScreen() {
         enabled: !loading && userData?.user !== undefined,
     });
 
-    function gerarCalendario(
-        mes = dayjs().locale('pt-br').month(),
-        ano = dayjs().locale('pt-br').year()
-    ) {
-        const inicioMes = dayjs(new Date(ano, mes, 1));
-        const diasNoMes = inicioMes.daysInMonth();
-
-        const semanas = [];
-        let semana = new Array(7).fill(null);
-
-        // Preenche os dias do mês
-        for (let dia = 1; dia <= diasNoMes; dia++) {
-            const data = dayjs(new Date(ano, mes, dia));
-            const diaSemana = data.day();
-
-            semana[diaSemana] = dia;
-
-            // Quando chega no sábado, fecha a semana
-            if (diaSemana === 6 || dia === diasNoMes) {
-                semanas.push(semana);
-                semana = new Array(7).fill(null);
-            }
-        }
-
-        return semanas;
-    }
+    const { data: calendarPracticed } = useQuery({
+        queryKey: ['calendarPracticed'],
+        queryFn: () => api.get(`/user-activities/calendar-practiced/${userData?.user.id}`),
+        enabled: !loading && userData?.user !== undefined,
+    });
+    
 
     const calendario = gerarCalendario();
-
-    const getLevel = (sentences: number) => {
-        if (sentences <= 0) {
-            return 'Beginner';
-        } else if (sentences < 100) {
-            return 'Beginner +';
-        } else if (sentences < 200) {
-            return 'Beginner ++';
-        } else if (sentences < 500) {
-            return 'Intermediate';
-        } else if (sentences < 1000) {
-            return 'Intermediate +';
-        } else if (sentences < 1500) {
-            return 'Intermediate ++';
-        } else if (sentences < 2000) {
-            return 'Advanced';
-        } else if (sentences < 2500) {
-            return 'Advanced +';
-        } else if (sentences < 3000) {
-            return 'Advanced ++';
-        } else if (sentences < 3500) {
-            return 'Expert';
-        } else if (sentences < 4000) {
-            return 'Expert +';
-        } else if (sentences < 5000) {
-            return 'Expert ++';
-        } else {
-            return 'Master';
-        }
-    };
-
     const getLevelProgressPercentage = (sentences: number) => {
         return Math.round(Math.min(Math.max((sentences / 5000) * 100, 0), 100));
     };
-
+    
     return (
         <SafeAreaView style={{ flex: 1 }} edges={['top']}>
             <ScrollView showsVerticalScrollIndicator={false} backgroundColor="$background">
@@ -182,7 +118,7 @@ export default function ProfileScreen() {
                                     borderBottomRightRadius="$10"
                                 >
                                     <Paragraph size="$8" color="$white3" fontWeight="bold">
-                                        {getInitials(userData?.user.name)}
+                                        {getInitialsLetters(userData?.user.name)}
                                     </Paragraph>
                                 </Avatar>
 
@@ -324,8 +260,21 @@ export default function ProfileScreen() {
                         {calendario.map((semana, semanaIndex) => (
                             <XStack key={semanaIndex} gap="$2">
                                 {semana.map((dia, diaIndex) => {
-                                    const isChecked =
-                                        dia && parseInt(dia) > 16 && parseInt(dia) < 29;
+                                    const isChecked = calendarPracticed?.data?.[dia] > 0;
+                                    const getBackgroundColor = (amount: number) => {
+                                        if (amount < 5) {
+                                            return '$green4';
+                                        } else if (amount < 10) {
+                                            return '$green8';
+                                        } else if (amount < 15) {
+                                            return '$green10';
+                                        } else if (amount < 20) {
+                                            return '$green12';
+                                        } else {
+                                            return '$green12';
+                                        }
+                                    };
+
                                     return (
                                         <Card
                                             key={diaIndex}
@@ -335,7 +284,7 @@ export default function ProfileScreen() {
                                             backgroundColor={
                                                 dia
                                                     ? isChecked
-                                                        ? 'rgba(34, 197, 94, 0.3)'
+                                                        ? getBackgroundColor(calendarPracticed?.data?.[dia] || 0)
                                                         : 'rgba(255, 255, 255, 0.06)'
                                                     : 'rgba(255, 255, 255, 0.01)'
                                             }

@@ -38,6 +38,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user-activities/days-practiced/{userId}', [UserActivitiesController::class, 'daysPracticed']);
     Route::get('/user-activities/total-days-practiced/{userId}', [UserActivitiesController::class, 'totalDaysPracticed']);
     Route::get('/user-activities/total-sentences-practiced/{userId}', [UserActivitiesController::class, 'totalSentencesPracticed']);
+    Route::get('/user-activities/calendar-practiced/{userId}', [UserActivitiesController::class, 'calendarPracticed']);
 
     # Sentenças em revisão
     //GET /api/sentences/{userId}?filter=review

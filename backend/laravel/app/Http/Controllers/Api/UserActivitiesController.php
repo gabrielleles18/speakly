@@ -94,4 +94,25 @@ class UserActivitiesController extends Controller
 
         return intval($totalSentencesPracticed);
     }
+
+    public function calendarPracticed($userId): array
+    {
+        $currentMonth = Carbon::now()->format('Y-m');
+        
+        // Busca todas as atividades do mês atual agrupadas por dia, contando a quantidade
+        $practicesByDay = UserActivity::where('user_id', $userId)
+            ->where('created_at', 'like', $currentMonth . '%')
+            ->selectRaw('DAY(created_at) as day, COUNT(*) as count')
+            ->groupBy('day')
+            ->pluck('count', 'day')
+            ->toArray();
+
+        // Cria um array com 31 dias (índices de 1 a 31), inicializando com 0
+        $calendar = [];
+        for ($day = 1; $day <= 31; $day++) {
+            $calendar[$day] = isset($practicesByDay[$day]) ? (int) $practicesByDay[$day] : 0;
+        }
+
+        return $calendar;
+    }
 }
