@@ -68,4 +68,39 @@ class AuthController extends Controller
             'message' => 'Logout successfully'
         ]);
     }
+
+    public function updateProfile(Request $request)
+    {
+        $user = $request->user();
+
+        if (! $user) {
+            return response()->json([
+                'message' => 'User not found'
+            ], 404);
+        }
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:100',
+            'currentPassword' => 'required|string|min:6',
+            'newPassword' => 'required|string|min:6|different:currentPassword',
+        ]);
+
+        if (! Hash::check($validated['currentPassword'], $user->password)) {
+            return response()->json([
+                'message' => 'Invalid current password'
+            ], 401);
+        }
+
+        $user->update([
+            'name' => $validated['name'],
+            'password' => Hash::make($validated['newPassword']),
+        ]);
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        return response()->json([
+            'user' => new AuthResource($user),
+            'token' => $token,
+            'isAuthenticated' => true,
+        ]);
+    }
 }

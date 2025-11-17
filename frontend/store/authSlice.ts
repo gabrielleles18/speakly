@@ -67,6 +67,21 @@ export const loadStoredToken = createAsyncThunk('auth/loadToken', async () => {
     }
 });
 
+export const updateProfile = createAsyncThunk('auth/updateProfile', async (data: { name: string; currentPassword: string; newPassword: string }, { rejectWithValue }) => {
+    try {
+        const response = await api.put('/profile', data);
+        const userData = response.data;
+
+        // salva token localmente (sem "Bearer " prefix)
+        await EncryptedStorage.setItem('userData', JSON.stringify(userData));
+        api.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
+
+        return userData;
+    } catch (error) {
+        return rejectWithValue((error as AxiosError).response?.data || 'Erro ao atualizar perfil');
+    }
+});
+
 interface User {
     id: number;
     name: string;

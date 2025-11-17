@@ -384,7 +384,9 @@ export default function ProfileScreen() {
                         pressStyle={{
                             opacity: 0.5,
                         }}
-                        onPress={() => {}}
+                        onPress={() => {
+                            router.push('/profile-edit');
+                        }}
                     >
                         Edit Profile
                     </Button>
